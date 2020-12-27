@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://exports/d2972c34-6dd7-4179-91d9-25c60438f508.png" type="Texture" id=1]
+[ext_resource path="res://exports/7aa5acc5-aabc-46a7-8e8e-f6fc9f404cbb.png" type="Texture" id=2]
+[ext_resource path="res://exports/b3954dfc-1539-4e5a-95ef-f9d9224f5b1b.png" type="Texture" id=3]
+[ext_resource path="res://UI/m3x6.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://exports/4818c1b1-d13c-40f4-ae80-3c2bc003d242.png" type="Texture" id=5]
+[ext_resource path="res://exports/1464c065-ec59-4ae3-95fb-6ce61a05aff9.png" type="Texture" id=6]
+[ext_resource path="res://Splash.gd" type="Script" id=7]
+[ext_resource path="res://exports/sfx_init.wav" type="AudioStream" id=8]
+[ext_resource path="res://exports/sfx_bark.ogg" type="AudioStream" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "splash"
+length = 2.5
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Bark")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "go_to_menu"
+} ]
+}
+
+[node name="Splash" type="Node"]
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.167, 0.167 )
+frames = SubResource( 1 )
+playing = true
+centered = false
+
+[node name="Label" type="Label" parent="."]
+margin_left = 123.5
+margin_top = 133.0
+margin_right = 215.5
+margin_bottom = 159.0
+custom_fonts/font = SubResource( 2 )
+text = "@Bae_Yusung"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/splash = SubResource( 3 )
+
+[node name="Bark" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="Init" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )

@@ -1,0 +1,13 @@
+Directories in this project:
+art - art assets used
+sound - sound assets used (split into music and sfx)
+hud - code for any hud and gui elements
+player - player ai/functionality
+enemies - enemy ai/functionality
+props - scenes for environment props
+levels - main scenes that contain level info
+screens - main scenes that contain nonlevel info
+global - singleton scenes
+scripts - other godot scripts used
+shaders - shader code
+

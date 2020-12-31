@@ -12,4 +12,4 @@ func _ready():
 
 
 func go_to_menu():
-	Transition.change_scene("res://World/Menu.tscn")
+	Transition.change_scene("res://screens/TitleScreen.tscn")

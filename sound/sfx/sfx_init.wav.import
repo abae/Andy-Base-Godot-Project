@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/sfx_init.wav-ff1e29bd46aba4b0b8ddde8f5a4698e2.sample"
+path="res://.import/sfx_init.wav-51300f83a309758c7ba8330084601148.sample"
 
 [deps]
 
-source_file="res://exports/sfx_init.wav"
-dest_files=[ "res://.import/sfx_init.wav-ff1e29bd46aba4b0b8ddde8f5a4698e2.sample" ]
+source_file="res://sound/sfx/sfx_init.wav"
+dest_files=[ "res://.import/sfx_init.wav-51300f83a309758c7ba8330084601148.sample" ]
 
 [params]
 

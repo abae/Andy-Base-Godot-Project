@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://hud/Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://screens/TitleScreen.gd" type="Script" id=2]
+[ext_resource path="res://sound/sfx/sfx_init.wav" type="AudioStream" id=5]
+
+[node name="Title" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="NewGame" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
+margin_top = 244.0
+margin_right = 1024.0
+margin_bottom = 269.0
+text = "Start Game"
+scene_to_load = "res://Pregame.tscn"
+
+[node name="HowtoPlay" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
+margin_top = 273.0
+margin_right = 1024.0
+margin_bottom = 298.0
+text = "How To Play"
+scene_to_load = "res://World/HowToPlay.tscn"
+
+[node name="Credits" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
+margin_top = 302.0
+margin_right = 1024.0
+margin_bottom = 327.0
+text = "Credits"
+scene_to_load = "res://World/Credits.tscn"
+
+[node name="Quit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
+margin_top = 331.0
+margin_right = 1024.0
+margin_bottom = 356.0
+text = "Quit"
+scene_to_load = "quit"
+
+[node name="StartSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[editable path="Menu/CenterRow/Buttons/NewGame"]
+
+[editable path="Menu/CenterRow/Buttons/Credits"]
+
+[editable path="Menu/CenterRow/Buttons/Quit"]

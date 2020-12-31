@@ -16,7 +16,23 @@ _global_script_class_icons={
 [application]
 
 config/name="AndyBaseGodotProject"
+run/main_scene="res://screens/Splash.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+PlayerStats="*res://player/PlayerStats.tscn"
+MusicController="*res://control/global/MusicController.tscn"
+Transition="*res://control/global/Transition.tscn"
+
+[display]
+
+window/size/width=320
+window/size/height=180
+window/size/resizable=false
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="viewport"
 
 [rendering]
 

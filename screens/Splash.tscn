@@ -6,45 +6,44 @@
 [ext_resource path="res://sound/sfx/sfx_init.wav" type="AudioStream" id=8]
 [ext_resource path="res://sound/sfx/sfx_bark.ogg" type="AudioStream" id=9]
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 1920, 1080 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 1920, 0, 1920, 1080 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 3840, 0, 1920, 1080 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 5760, 0, 1920, 1080 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 7680, 0, 1920, 1080 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=7]
 size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "splash"
+[sub_resource type="Animation" id=8]
 length = 2.5
 tracks/0/type = "audio"
 tracks/0/path = NodePath("Bark")
@@ -84,7 +83,7 @@ script = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.167, 0.167 )
-frames = SubResource( 1 )
+frames = SubResource( 6 )
 frame = 2
 playing = true
 centered = false
@@ -94,14 +93,14 @@ margin_left = 123.5
 margin_top = 133.0
 margin_right = 215.5
 margin_bottom = 159.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 7 )
 text = "@Bae_Yusung"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/splash = SubResource( 3 )
+anims/splash = SubResource( 8 )
 
 [node name="Bark" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )

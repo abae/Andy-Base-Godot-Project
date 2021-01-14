@@ -37,7 +37,7 @@ margin_top = 32.0
 margin_right = 320.0
 margin_bottom = 58.0
 text = "Start Game"
-scene_to_load = "res://levels/Level1.tscn"
+scene_to_load = "res://levels/Template.tscn"
 
 [node name="HowtoPlay" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
 margin_top = 62.0

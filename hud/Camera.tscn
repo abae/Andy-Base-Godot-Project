@@ -2,9 +2,7 @@
 
 [ext_resource path="res://hud/Camera.gd" type="Script" id=1]
 
-
-
-[node name="Camera2D" type="Camera2D"]
+[node name="Camera" type="Camera2D"]
 position = Vector2( 160, 90 )
 current = true
 zoom = Vector2( 3, 3 )

@@ -10,9 +10,9 @@ enum{
 
 var state = MOVE
 var velocity = Vector2.ZERO
-var stats = PlayerStats
 
-onready var swordHitbox = $Hitbox
+onready var stats = GameState.playerStats
+onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
 
 func _ready():

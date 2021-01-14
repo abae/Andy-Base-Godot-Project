@@ -1,6 +1,6 @@
 extends Node
 
-onready var camera = $Camera2D
+onready var camera = $Camera
 onready var enemies = $Enemies
 onready var player = $Players/Player
 var enemy_exists = true

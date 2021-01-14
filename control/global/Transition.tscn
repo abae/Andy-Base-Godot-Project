@@ -2,7 +2,6 @@
 
 [ext_resource path="res://control/global/Transition.gd" type="Script" id=1]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "In"
 length = 0.4
@@ -47,7 +46,7 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
-anchor_left = 1.1
+anchor_left = -0.1
 anchor_right = 1.1
 anchor_bottom = 1.0
 margin_bottom = 1.52588e-05

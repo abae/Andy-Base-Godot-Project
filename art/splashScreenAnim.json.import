@@ -1,0 +1,16 @@
+[remap]
+
+importer="eska.aseprite_importer"
+type="PackedScene"
+path="res://.import/splashScreenAnim.json-e989ff255844bcb0d87d995d8b26367e.scn"
+
+[deps]
+
+source_file="res://art/splashScreenAnim.json"
+dest_files=[ "res://.import/splashScreenAnim.json-e989ff255844bcb0d87d995d8b26367e.scn" ]
+
+[params]
+
+sheet_image=""
+post_script=""
+autoplay_animation="splash"

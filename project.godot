@@ -32,7 +32,50 @@ window/size/height=180
 window/size/resizable=false
 window/size/test_width=1280
 window/size/test_height=720
-window/stretch/mode="viewport"
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "eska.aseprite_importer" )
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+aseprite.wizard.plugin={
+"animated_texture/filename_pattern": "{basename}.{layer}.{animation}.Texture.{extension}",
+"animated_texture/frame_filename_pattern": "{basename}.{layer}.{animation}.{frame}.Texture.{extension}",
+"animated_texture/import_animated_texture": false,
+"exclude_layers_pattern": "",
+"only_visible_layers": false,
+"split_layers": false,
+"sprite_filename_pattern": "{basename}.{layer}.{extension}",
+"texture_atlas/filename_pattern": "{basename}.{layer}.Atlas.{extension}",
+"texture_atlas/frame_filename_pattern": "{basename}.{layer}.{animation}.{frame}.Atlas.{extension}",
+"texture_atlas/import_texture_atlas": false,
+"texture_strip/filename_pattern": "{basename}.{layer}.Strip.{extension}",
+"texture_strip/import_texture_strip": false,
+"trim_images": false
+}
 
 [rendering]
 

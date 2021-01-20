@@ -20,10 +20,6 @@ func _on_Button_pressed(scene_to_load):
 		elif scene_to_load == "res://Pregame.tscn":
 			$StartSFX.play()
 			Transition.change_scene(scene_to_load)
-			PlayerStats.reset_values()
 		else:
+# warning-ignore:return_value_discarded
 			get_tree().change_scene(scene_to_load)
-	
-func _on_Button_hovered(hovered_button):
-	pass
-	#hovered_button.grab_focus()

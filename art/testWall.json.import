@@ -1,0 +1,16 @@
+[remap]
+
+importer="eska.aseprite_importer"
+type="PackedScene"
+path="res://.import/testWall.json-bcfc20b0e86ef62026accf762dcce220.scn"
+
+[deps]
+
+source_file="res://art/testWall.json"
+dest_files=[ "res://.import/testWall.json-bcfc20b0e86ef62026accf762dcce220.scn" ]
+
+[params]
+
+sheet_image=""
+post_script=""
+autoplay_animation=""

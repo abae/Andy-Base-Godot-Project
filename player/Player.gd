@@ -11,9 +11,16 @@ enum{
 var state = MOVE
 var velocity = Vector2.ZERO
 
+onready var level = get_tree().get_current_scene()
 onready var stats = GameState.playerStats
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
+onready var sfx = $SFX
+
+signal screen_shake(shakeMagnitude, shakeLength)
+signal cam_move(x, y)
+signal cam_zoom(value)
+signal cam_free(state)
 
 func _ready():
 	randomize()
@@ -42,7 +49,11 @@ func move_state(delta):
 
 func move():
 	velocity = move_and_slide(velocity)
-	
+	if Input.is_action_pressed("ui_accept"):
+		emit_signal("cam_move", 300, 300)
+		emit_signal("cam_zoom", .5)
+	else:
+		emit_signal("cam_free", false)
 
 
 func _on_Hurtbox_area_entered(area):

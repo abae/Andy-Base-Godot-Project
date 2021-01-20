@@ -1,49 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://hud/fonts/m3x6.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://art/splashScreenAnim.png" type="Texture" id=2]
+[ext_resource path="res://art/splashScreenAnim.json" type="PackedScene" id=2]
 [ext_resource path="res://screens/Splash.gd" type="Script" id=7]
 [ext_resource path="res://sound/sfx/sfx_init.wav" type="AudioStream" id=8]
 [ext_resource path="res://sound/sfx/sfx_bark.ogg" type="AudioStream" id=9]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 1920, 1080 )
-
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 1920, 0, 1920, 1080 )
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 3840, 0, 1920, 1080 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 5760, 0, 1920, 1080 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 7680, 0, 1920, 1080 )
-
-[sub_resource type="SpriteFrames" id=6]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=2]
 length = 2.5
 tracks/0/type = "audio"
 tracks/0/path = NodePath("Bark")
@@ -81,26 +48,23 @@ tracks/1/keys = {
 [node name="Splash" type="Node"]
 script = ExtResource( 7 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Node2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 160, 90 )
 scale = Vector2( 0.167, 0.167 )
-frames = SubResource( 6 )
-frame = 1
-playing = true
-centered = false
 
 [node name="Label" type="Label" parent="."]
 margin_left = 123.5
 margin_top = 133.0
 margin_right = 215.5
 margin_bottom = 159.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 1 )
 text = "@Bae_Yusung"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/splash = SubResource( 8 )
+anims/splash = SubResource( 2 )
 
 [node name="Bark" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )

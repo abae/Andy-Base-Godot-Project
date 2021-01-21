@@ -18,12 +18,20 @@ position = Vector2( 612.68, 431.18 )
 
 [node name="TestBackground" type="ParallaxLayer" parent="Background"]
 motion_mirroring = Vector2( 320, 320 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="testWall" type="Sprite" parent="Background/TestBackground"]
 self_modulate = Color( 0.211765, 0.2, 0.2, 1 )
 texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Particles" type="Node2D" parent="."]
+
+[node name="Environment" type="Node2D" parent="."]
 
 [node name="Projectiles" type="Node2D" parent="."]
 

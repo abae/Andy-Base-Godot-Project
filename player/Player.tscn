@@ -6,7 +6,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.63838, 10 )
+extents = Vector2( 4.03441, 10 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -23,6 +23,7 @@ texture = ExtResource( 4 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
+collision_layer = 1
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
 

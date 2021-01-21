@@ -9,8 +9,8 @@ enum{
 }
 
 var state = MOVE
-var velocity = Vector2.ZERO
-var p_velocity = velocity
+var vel = Vector2.ZERO
+var p_vel = vel
 var input = Vector2.ZERO
 var p_input = input
 
@@ -48,9 +48,9 @@ func move_state(delta):
 	
 	#movement
 	if input != Vector2.ZERO:
-		velocity = velocity.move_toward(input * MAX_SPEED, ACCEL * delta)
+		vel = vel.move_toward(input * MAX_SPEED, ACCEL * delta)
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICT * delta)
+		vel = vel.move_toward(Vector2.ZERO, FRICT * delta)
 	
 	#sprite manipulation
 	squash_n_stretch()
@@ -63,10 +63,10 @@ func move_state(delta):
 	move()
 
 func move():
-	velocity = move_and_slide(velocity)
+	vel = move_and_slide(vel)
 
 func squash_n_stretch():
-	var squash = .15*(abs(velocity.x)/MAX_SPEED - abs(velocity.y)/MAX_SPEED)
+	var squash = 0.15*(abs(vel.x)/MAX_SPEED - abs(vel.y)/MAX_SPEED)
 	var defaultScale = 0.31 #get rid of this once we actually use a sprite
 	sprite.scale = defaultScale * Vector2(1 + squash, 1 - squash)
 
@@ -89,5 +89,5 @@ func _on_Hurtbox_area_entered(area):
 	hurtbox.create_hit_effect()
 
 func update_p_values():
-	p_velocity = velocity
+	p_vel = vel
 	p_input = input

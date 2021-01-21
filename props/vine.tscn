@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://props/vine.gd" type="Script" id=1]
+
+[node name="vine" type="Line2D"]
+points = PoolVector2Array( 0, 0, 23.7978, 79.0114, 78.3867, 29.5096 )
+width = 1.0
+default_color = Color( 0.160784, 0.184314, 0.313726, 0 )
+texture_mode = 1675231235
+script = ExtResource( 1 )
+alpha = 0.75
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Area" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Poly" type="CollisionPolygon2D" parent="Area"]
+modulate = Color( 0.976471, 0.92549, 0.145098, 0.172549 )
+position = Vector2( -0.222717, -0.222725 )
+polygon = PoolVector2Array( 0, 0, 78.3867, 29.5096, 23.7978, 79.0114 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

@@ -20,6 +20,7 @@ position = Vector2( 612.68, 431.18 )
 motion_mirroring = Vector2( 320, 320 )
 
 [node name="testWall" type="Sprite" parent="Background/TestBackground"]
+self_modulate = Color( 0.211765, 0.2, 0.2, 1 )
 texture = ExtResource( 4 )
 
 [node name="Particles" type="Node2D" parent="."]
@@ -31,6 +32,6 @@ texture = ExtResource( 4 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Player" parent="Players" instance=ExtResource( 2 )]
-position = Vector2( 213.562, 136.087 )
+position = Vector2( 163.165, 128.527 )
 
 [editable path="Camera"]

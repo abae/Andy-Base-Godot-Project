@@ -1,0 +1,16 @@
+[remap]
+
+importer="eska.aseprite_importer"
+type="PackedScene"
+path="res://.import/dust.json-80346071b8e940b5527d51b4aefe8a73.scn"
+
+[deps]
+
+source_file="res://art/dust.json"
+dest_files=[ "res://.import/dust.json-80346071b8e940b5527d51b4aefe8a73.scn" ]
+
+[params]
+
+sheet_image=""
+post_script=""
+autoplay_animation=""

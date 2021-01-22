@@ -1,9 +1,42 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://levels/Level.gd" type="Script" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hud/Camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://art/testWall.png" type="Texture" id=4]
+[ext_resource path="res://art/radial_gradient.png" type="Texture" id=5]
+[ext_resource path="res://art/Player.png" type="Texture" id=6]
+[ext_resource path="res://art/Player_Normal.png" type="Texture" id=7]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="TileSet" id=3]
+0/name = "testWall.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/occluder = SubResource( 1 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 2 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
 
 [node name="LevelTemplate" type="Node"]
 script = ExtResource( 1 )
@@ -16,15 +49,10 @@ position = Vector2( 612.68, 431.18 )
 
 [node name="Background" type="ParallaxBackground" parent="."]
 
-[node name="TestBackground" type="ParallaxLayer" parent="Background"]
-motion_mirroring = Vector2( 320, 320 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="testWall" type="Sprite" parent="Background/TestBackground"]
-self_modulate = Color( 0.211765, 0.2, 0.2, 1 )
+[node name="testWall" type="Sprite" parent="."]
+self_modulate = Color( 0.129412, 0.129412, 0.129412, 1 )
 texture = ExtResource( 4 )
+centered = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -32,6 +60,25 @@ __meta__ = {
 [node name="Particles" type="Node2D" parent="."]
 
 [node name="Environment" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Environment"]
+tile_set = SubResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 458767, 0, 0, 524303, 0, 0, 589839, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0 )
+
+[node name="Player" type="Sprite" parent="Environment"]
+position = Vector2( 168.167, 82.8635 )
+rotation = -1.74846e-07
+texture = ExtResource( 6 )
+normal_map = ExtResource( 7 )
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Light2D" type="Light2D" parent="Props"]
+position = Vector2( 124.761, 88.3523 )
+texture = ExtResource( 5 )
+shadow_enabled = true
 
 [node name="Projectiles" type="Node2D" parent="."]
 

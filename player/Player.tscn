@@ -1,41 +1,47 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://control/virtual/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 [ext_resource path="res://control/virtual/Hitbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://art/player.png" type="Texture" id=4]
+[ext_resource path="res://art/player_normal.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.03441, 10 )
+extents = Vector2( 2.5, 10 )
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 0, -0.0441942 )
 script = ExtResource( 2 )
 GRAVITY = 700
-JUMP_SPEED = 200
-FALL_SPEED = 150
+JUMP_SPEED = 280
+FALL_SPEED = 300
 
 [node name="DustTimer" type="Timer" parent="."]
 wait_time = 0.7
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.31, 0.311221 )
+position = Vector2( 0, -16 )
 texture = ExtResource( 4 )
+normal_map = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 1, 0, 0.780392 )
+position = Vector2( 0, -10 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -0.0441952 )
 collision_layer = 1
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+position = Vector2( -0.0220976, -0.0662918 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 
 [node name="BottomLeft" type="Position2D" parent="."]
-position = Vector2( -9.19016, 9.12001 )
+position = Vector2( -2.5, 0 )
 
 [node name="BottomRight" type="Position2D" parent="."]
-position = Vector2( 9.19016, 9.12001 )
+position = Vector2( 2.5, 0 )
 [connection signal="timeout" from="DustTimer" to="." method="_on_DustTimer_timeout"]

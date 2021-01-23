@@ -82,10 +82,9 @@ func move():
 	vel = move_and_slide(vel, Vector2(0,-1))
 
 func squash_n_stretch():
-	var squash = SQUISHINESS*(abs(vel.x)/MAX_SPEED - abs(vel.y)/MAX_SPEED)
-	var defaultScale = 0.31 #get rid of this once we actually use a sprite
-	sprite.scale = defaultScale * Vector2(1 + squash, 1 - squash)
-	sprite.offset.y = -2 * sprite.texture.get_size().y * (sprite.scale.y - defaultScale)
+	var squash = -SQUISHINESS * abs(vel.y)/MAX_SPEED
+	sprite.scale = Vector2(1 + squash, 1 - squash)
+	#sprite.offset.y = 2 * sprite.texture.get_size().y * (1 - sprite.scale.y)
 
 func _on_DustTimer_timeout():
 	if is_on_floor():

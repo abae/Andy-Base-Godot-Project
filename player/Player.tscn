@@ -7,7 +7,7 @@
 [ext_resource path="res://art/player_normal.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.5, 10 )
+extents = Vector2( 3, 8 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0, -0.0441942 )
@@ -21,13 +21,13 @@ wait_time = 0.7
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -16 )
+position = Vector2( 0, -9 )
 texture = ExtResource( 4 )
 normal_map = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 1, 0, 0.780392 )
-position = Vector2( 0, -10 )
+position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]

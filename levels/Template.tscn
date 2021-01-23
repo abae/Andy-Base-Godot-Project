@@ -73,11 +73,13 @@ tile_data = PoolIntArray( 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65
 [node name="Light2D" type="Light2D" parent="Props"]
 position = Vector2( 218.187, 117.052 )
 texture = ExtResource( 5 )
+color = Color( 0.976471, 0.913725, 0, 1 )
 shadow_enabled = true
 
 [node name="Light2D2" type="Light2D" parent="Props"]
 position = Vector2( 85.7038, 102.703 )
 texture = ExtResource( 5 )
+color = Color( 0.47451, 1, 0.180392, 1 )
 shadow_enabled = true
 
 [node name="Projectiles" type="Node2D" parent="."]

@@ -7,7 +7,7 @@ export var GRAVITY = 800
 export var JUMP_SPEED = 600
 export var FALL_SPEED = 800
 
-export var SQUISHINESS = 0.08
+export var SQUISHINESS = 0.0
 
 enum{
 	MOVE,

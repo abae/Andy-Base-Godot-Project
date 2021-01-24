@@ -3,11 +3,12 @@ extends KinematicBody2D
 export var MAX_SPEED = 80
 export var ACCEL = 500
 export var FRICT = 500
-export var GRAVITY = 800
-export var JUMP_SPEED = 600
-export var FALL_SPEED = 800
+export var GRAVITY = 700
+export var FALL_GRAVITY = 300
+export var JUMP_SPEED = 280
+export var FALL_SPEED = 300
 
-export var SQUISHINESS = 0.0
+export var SQUISHINESS = 0.1
 
 enum{
 	MOVE,
@@ -56,8 +57,18 @@ func move_state(delta):
 	
 	#vertical movement
 	vel.y = move_toward(vel.y, FALL_SPEED, GRAVITY * delta)
+	if !Input.is_action_pressed("ui_accept"):
+		vel.y = move_toward(vel.y, FALL_SPEED, FALL_GRAVITY * delta)
+	#jumping
 	if is_on_floor():
-		if Input.is_action_just_pressed("ui_accept"):
+		$JumpTimer.start()
+	if Input.is_action_pressed("ui_accept"):
+		if !$PreJumpTimer.is_stopped() && is_on_floor():
+			vel.y -= JUMP_SPEED
+	if Input.is_action_just_pressed("ui_accept"):
+		$PreJumpTimer.start()
+		if !$JumpTimer.is_stopped():
+			$JumpTimer.stop()
 			vel.y -= JUMP_SPEED
 	
 	#calculate collisions
@@ -79,8 +90,9 @@ func move():
 
 func squash_n_stretch():
 	var squash = -SQUISHINESS * abs(vel.y)/MAX_SPEED
-	$Sprite.scale = Vector2(sign($Sprite.scale.x)*1 + squash, 1 - squash)
+	$Sprite.scale = Vector2(sign($Sprite.scale.x)*(1 + squash), 1 - squash)
 	#$Sprite.offset.y = 2 * $Sprite.texture.get_size().y * (1 - $Sprite.scale.y)
+	#flip sprite for direction
 	if vel.x > 0:
 		$Sprite.scale.x = abs($Sprite.scale.x)
 		$Hair.offset.x = -2
@@ -88,13 +100,6 @@ func squash_n_stretch():
 		$Sprite.scale.x = -abs($Sprite.scale.x)
 		$Hair.offset.x = 2
 
-func _on_DustTimer_timeout():
-	if is_on_floor():
-		if(input.x > 0):
-			emit_dust($BottomLeft.global_position)
-		if(input.x < 0):
-			emit_dust($BottomRight.global_position)
-		
 func emit_dust(pos):
 	$DustTimer.start()
 	var dust = Dust.instance()
@@ -111,3 +116,10 @@ func update_p_values():
 	p_vel = vel
 	p_input = input
 	p_is_on_floor = is_on_floor()
+
+func _on_DustTimer_timeout():
+	if is_on_floor():
+		if(input.x > 0):
+			emit_dust($BottomLeft.global_position)
+		if(input.x < 0):
+			emit_dust($BottomRight.global_position)

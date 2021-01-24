@@ -7,22 +7,16 @@
 [ext_resource path="res://art/player_normal.png" type="Texture" id=5]
 [ext_resource path="res://props/Verlet.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.518182 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 8 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
-GRAVITY = 700
-JUMP_SPEED = 280
-FALL_SPEED = 300
-
-[node name="DustTimer" type="Timer" parent="."]
-wait_time = 0.7
-one_shot = true
+FALL_GRAVITY = 500
 
 [node name="Hair" parent="." instance=ExtResource( 6 )]
 light_mask = 2
@@ -34,7 +28,7 @@ offset = Vector2( -2, -16 )
 [node name="Line2D" parent="Hair" index="0"]
 light_mask = 2
 width = 4.0
-width_curve = SubResource( 2 )
+width_curve = SubResource( 1 )
 default_color = Color( 0.956863, 0.705882, 0.105882, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -44,10 +38,10 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 4 )
 normal_map = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 1, 0, 0.780392 )
 position = Vector2( 0, -8 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -0.0441952 )
@@ -63,6 +57,18 @@ position = Vector2( -2.5, 0 )
 
 [node name="BottomRight" type="Position2D" parent="."]
 position = Vector2( 2.5, 0 )
+
+[node name="DustTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="PreJumpTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
 [connection signal="timeout" from="DustTimer" to="." method="_on_DustTimer_timeout"]
 
 [editable path="Hair"]

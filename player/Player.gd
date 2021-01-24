@@ -12,7 +12,6 @@ export var SQUISHINESS = 0.0
 enum{
 	MOVE,
 }
-
 var state = MOVE
 var vel = Vector2.ZERO
 var p_vel = vel
@@ -22,10 +21,6 @@ var p_is_on_floor = true
 
 onready var level = get_tree().get_current_scene()
 onready var stats = GameState.playerStats
-onready var sprite = $Sprite
-onready var hitbox = $Hitbox
-onready var hurtbox = $Hurtbox
-onready var sfx = $SFX
 
 const Dust = preload("res://effect/Dust.tscn")
 
@@ -36,6 +31,7 @@ signal cam_free(state)
 
 func _ready():
 	randomize()
+	var startingPosition = position
 	stats.connect("no_health", self, "queue_free")
 
 func _physics_process(delta):
@@ -83,8 +79,14 @@ func move():
 
 func squash_n_stretch():
 	var squash = -SQUISHINESS * abs(vel.y)/MAX_SPEED
-	sprite.scale = Vector2(1 + squash, 1 - squash)
-	#sprite.offset.y = 2 * sprite.texture.get_size().y * (1 - sprite.scale.y)
+	$Sprite.scale = Vector2(sign($Sprite.scale.x)*1 + squash, 1 - squash)
+	#$Sprite.offset.y = 2 * $Sprite.texture.get_size().y * (1 - $Sprite.scale.y)
+	if vel.x > 0:
+		$Sprite.scale.x = abs($Sprite.scale.x)
+		$Hair.offset.x = -2
+	elif vel.x < 0:
+		$Sprite.scale.x = -abs($Sprite.scale.x)
+		$Hair.offset.x = 2
 
 func _on_DustTimer_timeout():
 	if is_on_floor():
@@ -102,8 +104,8 @@ func emit_dust(pos):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	hurtbox.start_invincibility(0.5)
-	hurtbox.create_hit_effect()
+	$Hurtbox.start_invincibility(0.5)
+	$Hurtbox.create_hit_effect()
 
 func update_p_values():
 	p_vel = vel

@@ -43,7 +43,7 @@ func _physics_process(delta):
 		$Area/Poly.polygon[1] = points[2]
 		$Area/Poly.polygon[2] = points[1]
 		return
-	vel -= 3 * ( cur_points[1] - start_points[1] ) * delta
+	vel -= 4 * ( cur_points[1] - start_points[1] ) * delta
 	vel *= .99
 	cur_points[1] += vel * delta
 	_update_curve( cur_points )
@@ -67,4 +67,4 @@ func _draw():
 	draw_polyline( curve.get_baked_points(), vinecolor )
 
 func _on_Area_body_entered(body):
-	vel += 1 * body.vel
+	vel += 0.2 * body.vel

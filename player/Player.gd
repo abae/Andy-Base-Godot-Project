@@ -40,6 +40,9 @@ func _physics_process(delta):
 		MOVE:
 			move_state(delta)
 	
+	if Input.is_action_just_pressed("ui_select"):
+		GameState.load_gameState()
+	
 	#update to previous values
 	update_p_values()
 
@@ -91,7 +94,6 @@ func move():
 func squash_n_stretch():
 	var squash = -SQUISHINESS * abs(vel.y)/MAX_SPEED
 	$Sprite.scale = Vector2(sign($Sprite.scale.x)*(1 + squash), 1 - squash)
-	#$Sprite.offset.y = 2 * $Sprite.texture.get_size().y * (1 - $Sprite.scale.y)
 	#flip sprite for direction
 	if vel.x > 0:
 		$Sprite.scale.x = abs($Sprite.scale.x)

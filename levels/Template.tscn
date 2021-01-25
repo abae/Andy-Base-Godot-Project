@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://levels/Level.gd" type="Script" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://art/testWall.png" type="Texture" id=4]
 [ext_resource path="res://art/radial_gradient.png" type="Texture" id=5]
 [ext_resource path="res://props/vine.tscn" type="PackedScene" id=6]
+[ext_resource path="res://props/Checkpoint.tscn" type="PackedScene" id=7]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -91,6 +92,12 @@ points = PoolVector2Array( 0, 0, 22.75, 69.125, 77.625, 47.5 )
 position = Vector2( 133.125, 55.875 )
 points = PoolVector2Array( 7.125, 40.25, 36.75, 65.75, 63.625, 40.125 )
 
+[node name="Checkpoint" parent="Props" instance=ExtResource( 7 )]
+position = Vector2( 120, 128 )
+
+[node name="Checkpoint2" parent="Props" instance=ExtResource( 7 )]
+position = Vector2( 261.098, 114.783 )
+
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -98,6 +105,6 @@ points = PoolVector2Array( 7.125, 40.25, 36.75, 65.75, 63.625, 40.125 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="Player" parent="Players" instance=ExtResource( 2 )]
-position = Vector2( 162.528, 159.498 )
+position = Vector2( 176, 160 )
 
 [editable path="Camera"]

@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+God="*res://control/global/God.gd"
 GameState="*res://control/global/GameState.tscn"
 Transition="*res://control/global/Transition.tscn"
 MusicController="*res://control/global/MusicController.tscn"

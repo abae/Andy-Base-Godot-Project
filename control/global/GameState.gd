@@ -4,6 +4,7 @@ extends Node
 
 onready var playerStats = $PlayerStats
 
+var transportPosition = null
 var checkpointPosition := Vector2(0,0)
 var savePath = "user://gameState.dat"
 
@@ -28,7 +29,7 @@ func load_gameState():
 		if err == OK:
 			var data = file.get_var()
 			file.close()
-			print(data)
+			checkpointPosition = Vector2(data["checkpointPosition"][0], data["checkpointPosition"][1])
 			print("game loaded!")
 			return
 		print("game failed to load")

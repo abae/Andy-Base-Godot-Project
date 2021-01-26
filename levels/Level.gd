@@ -1,19 +1,21 @@
 extends Node
 
-onready var camera = $Camera
-onready var enemies = $Enemies
-onready var player = $Players/Player
-var enemy_exists = true
-var player_exists = true
+const Player = preload("res://player/Player.tscn")
 
 func _ready():
-	player.connect("screen_shake", camera, "screen_shake")
-	player.connect("cam_move", camera, "cam_move")
-	player.connect("cam_zoom", camera, "cam_zoom")
-	player.connect("cam_free", camera, "cam_free")
-	camera.connect("cam2player", self, "cam2player")
-	
-	
-func cam2player():
-	camera.position = player.position
-	camera.zoomTarget = 1.0
+	GameState.load_gameState()
+	var spawnPosition
+	if GameState.transportPosition == null:
+		spawnPosition = GameState.checkpointPosition
+	else:
+		spawnPosition = GameState.transportPosition
+	create_player(spawnPosition)
+	God.camera = $Camera
+	God.camera.position = spawnPosition
+
+func create_player(vec):
+	var player = Player.instance()
+	$Players.add_child(player)
+	God.player = player
+	player.position = vec
+	player.get_node("Hair").init_position()

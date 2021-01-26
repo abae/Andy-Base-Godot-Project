@@ -40,9 +40,6 @@ func _physics_process(delta):
 		MOVE:
 			move_state(delta)
 	
-	if Input.is_action_just_pressed("ui_select"):
-		GameState.load_gameState()
-	
 	#update to previous values
 	update_p_values()
 

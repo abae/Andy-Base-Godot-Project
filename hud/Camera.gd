@@ -21,7 +21,7 @@ func _ready():
 func _process(delta):
 	recover()
 	if !freeCam:
-		emit_signal("cam2player")
+		God.cam2player()
 
 func recover():
 	offset = Vector2(rand_range(-shakeRemain,shakeRemain), rand_range(-shakeRemain,shakeRemain)) 
@@ -34,13 +34,12 @@ func screen_shake(_shakeMagnitude, _shakeLength):
 		shakeRemain = _shakeMagnitude
 		shakeLength = _shakeLength
 
-func cam_free(state):
-	freeCam = state
-
-func cam_move(x,y):
+func cam_move(vec):
 	freeCam = true
-	position.x = x
-	position.y = y
+	position = vec
 	
 func cam_zoom(value):
 	zoomTarget = value
+	
+func cam_free(state):
+	freeCam = state

@@ -17,7 +17,7 @@ func _on_Button_pressed(scene_to_load):
 		clicked = true
 		if scene_to_load == "quit":
 			get_tree().quit()
-		elif scene_to_load == "res://Pregame.tscn":
+		elif scene_to_load == "res://levels/Template.tscn":
 			$StartSFX.play()
 			Transition.change_scene(scene_to_load)
 		else:

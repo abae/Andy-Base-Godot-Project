@@ -77,6 +77,15 @@ aseprite.wizard.plugin={
 "trim_images": false
 }
 
+[layer_names]
+
+2d_physics/layer_1="environment"
+2d_physics/layer_2="player"
+2d_physics/layer_3="player_hitbox"
+2d_physics/layer_4="enemy"
+2d_physics/layer_5="enemy_hitbox"
+2d_physics/layer_6="soft_collision"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

@@ -40,7 +40,7 @@ func _physics_process(delta):
 
 func move_state(delta):
 	#get user input
-	input.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	if input.length() > 1.0:
 		input = input.normalized()
 	
@@ -52,7 +52,7 @@ func move_state(delta):
 	
 	#vertical movement
 	vel.y = move_toward(vel.y, FALL_SPEED, GRAVITY * delta)
-	if !Input.is_action_pressed("ui_accept"):
+	if !Input.is_action_pressed("jump"):
 		vel.y = move_toward(vel.y, FALL_SPEED, FALL_GRAVITY * delta)
 	#jumping
 	if is_on_floor():
@@ -77,10 +77,10 @@ func move_state(delta):
 func move():
 	vel = move_and_slide(vel, Vector2(0,-1))
 func jump() -> bool:
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("jump"):
 		if !$PreJumpTimer.is_stopped() && is_on_floor():
 			return true
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("jump"):
 		$PreJumpTimer.start()
 		if !$JumpTimer.is_stopped():
 			$JumpTimer.stop()

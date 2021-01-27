@@ -9,9 +9,7 @@ var zoomSpeed = .1
 var shakeMagnitude = 0.0
 var shakeLength = 1.0
 var shakeRemain = 0.0
-	
-signal cam2player()
-	
+
 func _ready():
 	limit_top = topLeft.position.y
 	limit_left = topLeft.position.x

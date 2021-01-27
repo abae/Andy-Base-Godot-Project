@@ -25,11 +25,6 @@ onready var stats = GameState.playerStats
 
 const Dust = preload("res://effect/Dust.tscn")
 
-signal screen_shake(shakeMagnitude, shakeLength)
-signal cam_move(x, y)
-signal cam_zoom(value)
-signal cam_free(state)
-
 func _ready():
 	randomize()
 	var startingPosition = position
@@ -62,15 +57,9 @@ func move_state(delta):
 	#jumping
 	if is_on_floor():
 		$JumpTimer.start()
-	if Input.is_action_pressed("ui_accept"):
-		if !$PreJumpTimer.is_stopped() && is_on_floor():
-			vel.y -= JUMP_SPEED
-	if Input.is_action_just_pressed("ui_accept"):
-		$PreJumpTimer.start()
-		if !$JumpTimer.is_stopped():
-			$JumpTimer.stop()
-			vel.y -= JUMP_SPEED
-	
+	if jump():
+		vel.y -= JUMP_SPEED
+		
 	#calculate collisions
 	move()
 	
@@ -87,6 +76,16 @@ func move_state(delta):
 
 func move():
 	vel = move_and_slide(vel, Vector2(0,-1))
+func jump() -> bool:
+	if Input.is_action_pressed("ui_accept"):
+		if !$PreJumpTimer.is_stopped() && is_on_floor():
+			return true
+	if Input.is_action_just_pressed("ui_accept"):
+		$PreJumpTimer.start()
+		if !$JumpTimer.is_stopped():
+			$JumpTimer.stop()
+			return true
+	return false
 
 func squash_n_stretch():
 	var squash = -SQUISHINESS * abs(vel.y)/MAX_SPEED
@@ -98,7 +97,6 @@ func squash_n_stretch():
 	elif vel.x < 0:
 		$Sprite.scale.x = -abs($Sprite.scale.x)
 		$Hair.offset.x = 2
-
 func emit_dust(pos):
 	$DustTimer.start()
 	var dust = Dust.instance()
@@ -106,15 +104,15 @@ func emit_dust(pos):
 	dust.scale.x = sign(pos.x - global_position.x)
 	dust.global_position = pos
 
-func _on_Hurtbox_area_entered(area):
-	stats.health -= area.damage
-	$Hurtbox.start_invincibility(0.5)
-	$Hurtbox.create_hit_effect()
-
 func update_p_values():
 	p_vel = vel
 	p_input = input
 	p_is_on_floor = is_on_floor()
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= area.damage
+	$Hurtbox.start_invincibility(0.5)
+	$Hurtbox.create_hit_effect()
 
 func _on_DustTimer_timeout():
 	if is_on_floor():

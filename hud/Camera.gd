@@ -16,7 +16,7 @@ func _ready():
 	limit_bottom = bottomRight.position.y
 	limit_right = bottomRight.position.x
 	
-func _process(delta):
+func _process(_delta):
 	recover()
 	if !freeCam:
 		God.cam2player()

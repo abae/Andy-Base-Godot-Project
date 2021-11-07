@@ -27,7 +27,7 @@ const Dust = preload("res://effect/Dust.tscn")
 
 func _ready():
 	randomize()
-	var startingPosition = position
+	var _startingPosition = position
 	stats.connect("no_health", self, "queue_free")
 
 func _physics_process(delta):

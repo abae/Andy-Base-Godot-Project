@@ -1,26 +1,30 @@
 [remap]
 
-importer="aseprite.wizard.plugin"
-type="SpriteFrames"
-path="res://.import/testWall.aseprite-17bacf1c901426dcc41f967e20b3027a.res"
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://kpuyckxkrg6o"
+valid=false
 
 [deps]
 
 source_file="res://art/testWall.aseprite"
-dest_files=[ "res://.import/testWall.aseprite-17bacf1c901426dcc41f967e20b3027a.res" ]
 
 [params]
 
-split_layers=false
-exclude_layers_pattern=""
-only_visible_layers=false
-trim_images=false
-sprite_filename_pattern="{basename}.{layer}.{extension}"
-texture_strip/import_texture_strip=false
-texture_strip/filename_pattern="{basename}.{layer}.Strip.{extension}"
-texture_atlas/import_texture_atlas=false
-texture_atlas/filename_pattern="{basename}.{layer}.Atlas.{extension}"
-texture_atlas/frame_filename_pattern="{basename}.{layer}.{animation}.{frame}.Atlas.{extension}"
-animated_texture/import_animated_texture=false
-animated_texture/filename_pattern="{basename}.{layer}.{animation}.Texture.{extension}"
-animated_texture/frame_filename_pattern="{basename}.{layer}.{animation}.{frame}.Texture.{extension}"
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

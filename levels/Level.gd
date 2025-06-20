@@ -10,11 +10,11 @@ func _ready():
 	else:
 		spawnPosition = GameState.transportPosition
 	create_player(spawnPosition)
-	God.camera = $Camera
+	God.camera = $PlayerCamera
 	God.camera.position = spawnPosition
 
 func create_player(vec):
-	var player = Player.instance()
+	var player = Player.instantiate()
 	$Players.add_child(player)
 	God.player = player
 	player.position = vec

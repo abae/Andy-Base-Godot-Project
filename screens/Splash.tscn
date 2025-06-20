@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://hud/fonts/m3x6.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://hud/fonts/m3x6.ttf" type="FontFile" id=1]
 [ext_resource path="res://art/splashScreenAnim.json" type="PackedScene" id=2]
 [ext_resource path="res://screens/Splash.gd" type="Script" id=7]
 [ext_resource path="res://sound/sfx/sfx_init.wav" type="AudioStream" id=8]
 [ext_resource path="res://sound/sfx/sfx_bark.ogg" type="AudioStream" id=9]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 size = 32
 font_data = ExtResource( 1 )
 
@@ -28,7 +28,7 @@ tracks/0/keys = {
 "start_offset": 0.0,
 "stream": ExtResource( 9 )
 } ],
-"times": PoolRealArray( 0, 1.5 )
+"times": PackedFloat32Array( 0, 1.5 )
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -37,8 +37,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 2.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array( 2.5 ),
+"transitions": PackedFloat32Array( 1 ),
 "values": [ {
 "args": [  ],
 "method": "go_to_menu"
@@ -53,11 +53,11 @@ position = Vector2( 160, 90 )
 scale = Vector2( 0.167, 0.167 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 123.5
-margin_top = 133.0
-margin_right = 215.5
-margin_bottom = 159.0
-custom_fonts/font = SubResource( 1 )
+offset_left = 123.5
+offset_top = 133.0
+offset_right = 215.5
+offset_bottom = 159.0
+theme_override_fonts/font = SubResource( 1 )
 text = "@Bae_Yusung"
 __meta__ = {
 "_edit_use_anchors_": false

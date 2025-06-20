@@ -1,63 +1,62 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://bjxbdu3okybl5"]
 
-[ext_resource path="res://control/virtual/Hurtbox.tscn" type="PackedScene" id=1]
-[ext_resource path="res://player/Player.gd" type="Script" id=2]
-[ext_resource path="res://control/virtual/Hitbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://art/player.png" type="Texture" id=4]
-[ext_resource path="res://art/player_normal.png" type="Texture" id=5]
-[ext_resource path="res://props/Verlet.tscn" type="PackedScene" id=6]
+[ext_resource type="PackedScene" path="res://control/virtual/Hurtbox.tscn" id="1"]
+[ext_resource type="Script" uid="uid://bn7be5et2fadn" path="res://player/Player.gd" id="2"]
+[ext_resource type="PackedScene" path="res://control/virtual/Hitbox.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://bjv8a7h0hcukw" path="res://art/player.png" id="3_x8kxw"]
+[ext_resource type="PackedScene" path="res://props/Verlet.tscn" id="6"]
 
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.518182 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id="1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.518182), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3, 8 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(6, 16)
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-script = ExtResource( 2 )
+script = ExtResource("2")
 FALL_GRAVITY = 500
 
-[node name="Hair" parent="." instance=ExtResource( 6 )]
+[node name="Hair" parent="." instance=ExtResource("6")]
 light_mask = 2
-position = Vector2( -2, -16 )
+position = Vector2(-2, -16)
 length = 7.0
 end_pin = false
-offset = Vector2( -2, -16 )
+offset = Vector2(-2, -16)
 
 [node name="Line2D" parent="Hair" index="0"]
 light_mask = 2
-points = PoolVector2Array( 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0 )
+points = PackedVector2Array(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0)
 width = 4.0
-width_curve = SubResource( 1 )
-default_color = Color( 0.956863, 0.705882, 0.105882, 1 )
+width_curve = SubResource("1")
+default_color = Color(0.956863, 0.705882, 0.105882, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 4 )
-normal_map = ExtResource( 5 )
-offset = Vector2( 0, -9 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_x8kxw")
+offset = Vector2(0, -9)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-modulate = Color( 0, 1, 0, 0.780392 )
-position = Vector2( 0, -8 )
-shape = SubResource( 2 )
+[node name="CollisionShape3D" type="CollisionShape2D" parent="."]
+modulate = Color(0, 1, 0, 0.780392)
+position = Vector2(0, -8)
+shape = SubResource("2")
 
-[node name="Hitbox" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, -0.0441952 )
+[node name="Hitbox" parent="." instance=ExtResource("3")]
+position = Vector2(0, -0.0441952)
 collision_layer = 1
 
-[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
-position = Vector2( -0.0220976, -0.0662918 )
+[node name="Hurtbox" parent="." instance=ExtResource("1")]
+position = Vector2(-0.0220976, -0.0662918)
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 
-[node name="BottomLeft" type="Position2D" parent="."]
-position = Vector2( -2.5, 0 )
+[node name="BottomLeft" type="Marker2D" parent="."]
+position = Vector2(-2.5, 0)
 
-[node name="BottomRight" type="Position2D" parent="."]
-position = Vector2( 2.5, 0 )
+[node name="BottomRight" type="Marker2D" parent="."]
+position = Vector2(2.5, 0)
 
 [node name="DustTimer" type="Timer" parent="."]
 wait_time = 0.7
@@ -70,6 +69,7 @@ one_shot = true
 [node name="PreJumpTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
+
 [connection signal="timeout" from="DustTimer" to="." method="_on_DustTimer_timeout"]
 
 [editable path="Hair"]

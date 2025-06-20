@@ -1,7 +1,8 @@
+class_name PlayerCamera
 extends Camera2D
 
-onready var topLeft = $Limits/TopLeft
-onready var bottomRight = $Limits/BottomRight
+@onready var topLeft = $Limits/TopLeft
+@onready var bottomRight = $Limits/BottomRight
 
 var freeCam = false
 var zoomTarget = 1.0
@@ -22,7 +23,7 @@ func _process(_delta):
 		God.cam2player()
 
 func recover():
-	offset = Vector2(rand_range(-shakeRemain,shakeRemain), rand_range(-shakeRemain,shakeRemain)) 
+	offset = Vector2(randf_range(-shakeRemain,shakeRemain), randf_range(-shakeRemain,shakeRemain)) 
 	shakeRemain = max(0, shakeRemain - ((1.0/shakeLength)*shakeMagnitude))
 	zoom += (Vector2(zoomTarget,zoomTarget) - zoom)*zoomSpeed
 

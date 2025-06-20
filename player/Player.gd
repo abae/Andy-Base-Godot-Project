@@ -1,14 +1,14 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-export var MAX_SPEED = 80
-export var ACCEL = 500
-export var FRICT = 500
-export var GRAVITY = 700
-export var FALL_GRAVITY = 300
-export var JUMP_SPEED = 280
-export var FALL_SPEED = 300
+@export var MAX_SPEED = 80
+@export var ACCEL = 500
+@export var FRICT = 500
+@export var GRAVITY = 700
+@export var FALL_GRAVITY = 300
+@export var JUMP_SPEED = 280
+@export var FALL_SPEED = 300
 
-export var SQUISHINESS = 0.1
+@export var SQUISHINESS = 0.1
 
 enum{
 	MOVE,
@@ -20,15 +20,15 @@ var input = Vector2.ZERO
 var p_input = input
 var p_is_on_floor = true
 
-onready var level = get_tree().get_current_scene()
-onready var stats = GameState.playerStats
+@onready var level = get_tree().get_current_scene()
+@onready var stats = GameState.playerStats
 
 const Dust = preload("res://effect/Dust.tscn")
 
 func _ready():
 	randomize()
 	var _startingPosition = position
-	stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", Callable(self, "queue_free"))
 
 func _physics_process(delta):
 	match state:
@@ -75,7 +75,10 @@ func move_state(delta):
 			emit_dust($BottomRight.global_position)
 
 func move():
-	vel = move_and_slide(vel, Vector2(0,-1))
+	set_velocity(vel)
+	set_up_direction(Vector2(0,-1))
+	move_and_slide()
+	vel = velocity
 func jump() -> bool:
 	if Input.is_action_pressed("jump"):
 		if !$PreJumpTimer.is_stopped() && is_on_floor():
@@ -89,17 +92,17 @@ func jump() -> bool:
 
 func squash_n_stretch():
 	var squash = -SQUISHINESS * abs(vel.y)/MAX_SPEED
-	$Sprite.scale = Vector2(sign($Sprite.scale.x)*(1 + squash), 1 - squash)
+	$Sprite2D.scale = Vector2(sign($Sprite2D.scale.x)*(1 + squash), 1 - squash)
 	#flip sprite for direction
 	if vel.x > 0:
-		$Sprite.scale.x = abs($Sprite.scale.x)
+		$Sprite2D.scale.x = abs($Sprite2D.scale.x)
 		$Hair.offset.x = -2
 	elif vel.x < 0:
-		$Sprite.scale.x = -abs($Sprite.scale.x)
+		$Sprite2D.scale.x = -abs($Sprite2D.scale.x)
 		$Hair.offset.x = 2
 func emit_dust(pos):
 	$DustTimer.start()
-	var dust = Dust.instance()
+	var dust = Dust.instantiate()
 	level.get_node("Particles").add_child(dust)
 	dust.scale.x = sign(pos.x - global_position.x)
 	dust.global_position = pos

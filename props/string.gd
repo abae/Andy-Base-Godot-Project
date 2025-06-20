@@ -1,16 +1,16 @@
 extends Node2D
 
 
-export (float) var length = 30
-export (float) var constrain = 1
-export (Vector2) var gravity = Vector2(0,9.8)
-export (float) var friction = 0.9
-export (bool) var start_pin = true
-export (bool) var end_pin = true
-export (Vector2) var offset = Vector2(0,0)
+@export var length: float = 30
+@export var constrain: float = 1
+@export var gravity: Vector2 = Vector2(0,9.8)
+@export var friction: float = 0.9
+@export var start_pin: bool = true
+@export var end_pin: bool = true
+@export var offset: Vector2 = Vector2(0,0)
 
-var pos: PoolVector2Array
-var pos_ex: PoolVector2Array
+var pos: PackedVector2Array
+var pos_ex: PackedVector2Array
 var count: int
 
 func _ready():

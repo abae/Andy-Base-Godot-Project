@@ -1,4 +1,4 @@
 extends Button
 
-export(String) var scene_to_load
+@export var scene_to_load: String
 

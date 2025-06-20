@@ -1,0 +1,10 @@
+res://default_env.tres
+res://levels/Template.tscn
+res://effect/dust.tres
+res://props/testWall.tres
+res://player/Player.tscn
+res://props/vine.tscn
+res://control/global/GameState.tscn
+res://control/global/MusicController.tscn
+res://hud/Camera.tscn
+res://levels/Level.gd

@@ -1,3 +1,4 @@
+@tool
 # Copyright (c) eska <eska@eska.me>
 # All rights reserved.
 #
@@ -21,7 +22,6 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-tool
 
 class Frame:
 	var rect
@@ -98,8 +98,12 @@ func get_animation_count():
 func get_format():
 	return _format
 
-func parse_json( json ):
-	_dict = parse_json( json )
+var test_json_conv = JSON.new()
+test_json_conv.parse( json ):
+func test_json_conv.get_data()
+	var test_json_conv = JSON.new()
+	test_json_conv.parse( json )
+	_dict = test_json_conv.get_data()
 	if typeof(_dict) != TYPE_DICTIONARY:
 		_error_message = ERRMSG_INVALID_JSON
 		return FAILED
@@ -171,7 +175,7 @@ func _parse_frames_dict( frames ):
 		# `file 0.ase` => `file 0` => `0`
 		var index = key.get_basename().split(' ')
 		index = index[index.size()-1]
-		if not index.is_valid_integer():
+		if not index.is_valid_int():
 			_error_message = ERRMSG_INVALID_KEY_STRF % key
 			return ERR_INVALID_DATA
 		ordered_frames[index.to_int()] = key
@@ -264,7 +268,7 @@ func _validate_frame( frame ):
 	if make_rect2( frame.frame ) == null:
 		_error_message = ERRMSG_INVALID_VALUE_STRF % 'frame'
 		return ERR_INVALID_DATA
-	errmsg = _get_value_error( frame, 'duration', TYPE_REAL )
+	errmsg = _get_value_error( frame, 'duration', TYPE_FLOAT )
 	if errmsg:
 		_error_message = errmsg
 		return ERR_INVALID_DATA
@@ -290,11 +294,11 @@ func _validate_animation( anim ):
 		_error_message = ERRMSG_INVALID_VALUE_STRF % 'direction'
 		return ERR_INVALID_DATA
 	
-	errmsg = _get_value_error( anim, 'from', TYPE_REAL )
+	errmsg = _get_value_error( anim, 'from', TYPE_FLOAT )
 	if errmsg:
 		_error_message = errmsg
 		return ERR_INVALID_DATA
-	errmsg = _get_value_error( anim, 'to', TYPE_REAL )
+	errmsg = _get_value_error( anim, 'to', TYPE_FLOAT )
 	if errmsg:
 		_error_message = errmsg
 		return ERR_INVALID_DATA

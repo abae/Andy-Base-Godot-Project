@@ -2,7 +2,7 @@
 
 extends Node
 
-onready var playerStats = $PlayerStats
+@onready var playerStats = $PlayerStats
 
 var transportPosition = null
 var checkpointPosition := Vector2(0,0)
@@ -13,9 +13,8 @@ func save_gameState():
 		"checkpointPosition" : [checkpointPosition.x, checkpointPosition.y] \
 	}
 	
-	var file = File.new()
-	var err = file.open_encrypted_with_pass(savePath, File.WRITE, OS.get_unique_id())
-	if err == OK:
+	var file = FileAccess.open(savePath, FileAccess.WRITE)
+	if file != null:
 		file.store_var(data)
 		file.close()
 		print("game saved!")
@@ -23,13 +22,11 @@ func save_gameState():
 	print("game failed to save")
 
 func load_gameState():
-	var file = File.new()
-	if file.file_exists(savePath):
-		var err = file.open_encrypted_with_pass(savePath, File.READ, OS.get_unique_id())
-		if err == OK:
-			var data = file.get_var()
-			file.close()
-			checkpointPosition = Vector2(data["checkpointPosition"][0], data["checkpointPosition"][1])
-			print("game loaded!")
-			return
-		print("game failed to load")
+	var file = FileAccess.open(savePath, FileAccess.READ)
+	if file != null:
+		var data = file.get_var()
+		file.close()
+		checkpointPosition = Vector2(data["checkpointPosition"][0], data["checkpointPosition"][1])
+		print("game loaded!")
+		return
+	print("game failed to load")

@@ -12,4 +12,4 @@ func _ready():
 
 
 func go_to_menu():
-	Transition.change_scene("res://screens/TitleScreen.tscn")
+	Transition.change_scene_to_file("res://screens/TitleScreen.tscn")

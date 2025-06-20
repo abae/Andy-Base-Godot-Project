@@ -1,11 +1,11 @@
-tool
+@tool
 extends Line2D
 
 var curve
-export( Color, RGBA ) var vinecolor = Color( 0, 0, 0, 1 )
-export( float, 0, 1.0 ) var alpha := 0.2
-var start_points : PoolVector2Array
-var cur_points : PoolVector2Array
+@export var vinecolor = Color( 0, 0, 0, 1 ) # ( Color, RGBA )
+@export var alpha := 0.2 # ( float, 0, 1.0 )
+var start_points : PackedVector2Array
+var cur_points : PackedVector2Array
 var vel = Vector2.ZERO
 var _is_oscillating = true
 
@@ -14,19 +14,17 @@ func _ready():
 	curve.add_point( Vector2.ZERO )
 	curve.add_point( Vector2.ZERO )
 	vel.x = 100
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		_update_curve( points )
-		update()
 	else:
-		start_points = PoolVector2Array( points )
-		cur_points = PoolVector2Array( points )
+		start_points = PackedVector2Array( points )
+		cur_points = PackedVector2Array( points )
 		_update_curve( cur_points )
-		update()
 		default_color.a = 0
 		#cur_points[1] += Vector2( -18, 0 )
-	$Area/Poly.polygon[0] = cur_points[0]
-	$Area/Poly.polygon[1] = cur_points[2]
-	$Area/Poly.polygon[2] = cur_points[1]
+	$Area3D/Poly.polygon[0] = cur_points[0]
+	$Area3D/Poly.polygon[1] = cur_points[2]
+	$Area3D/Poly.polygon[2] = cur_points[1]
 		
 func _on_Timer_timeout():
 	pass
@@ -36,18 +34,16 @@ func _on_Timer_timeout():
 
 
 func _physics_process(delta):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		_update_curve( points )
-		update()
-		$Area/Poly.polygon[0] = points[0]
-		$Area/Poly.polygon[1] = points[2]
-		$Area/Poly.polygon[2] = points[1]
+		$Area3D/Poly.polygon[0] = points[0]
+		$Area3D/Poly.polygon[1] = points[2]
+		$Area3D/Poly.polygon[2] = points[1]
 		return
 	vel -= 4 * ( cur_points[1] - start_points[1] ) * delta
 	vel *= .99
 	cur_points[1] += vel * delta
 	_update_curve( cur_points )
-	update()
 
 
 func _update_curve( polypoints ):

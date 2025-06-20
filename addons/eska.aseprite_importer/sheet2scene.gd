@@ -1,3 +1,4 @@
+@tool
 # Copyright (c) eska <eska@eska.me>
 # All rights reserved.
 #
@@ -21,7 +22,6 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-tool
 
 const Sheet = preload('sheet.gd')
 
@@ -50,7 +50,7 @@ static func _stretch_animation_track( animation, track, length ):
 
 func merge( sheet, texture, packed_scene, post_script_path, autoplay_name, aggressive=false ):
 	assert( typeof(sheet) == TYPE_OBJECT and sheet is Sheet )
-	assert( typeof(texture) == TYPE_OBJECT and texture is Texture )
+	assert( typeof(texture) == TYPE_OBJECT and texture is Texture2D )
 	assert( typeof(packed_scene) == TYPE_OBJECT and packed_scene is PackedScene )
 	assert( typeof(post_script_path) == TYPE_STRING)
 	
@@ -58,12 +58,12 @@ func merge( sheet, texture, packed_scene, post_script_path, autoplay_name, aggre
 	var sprite = null
 	var player = null
 	
-	if packed_scene.can_instance():
-		scene = packed_scene.instance()
+	if packed_scene.can_instantiate():
+		scene = packed_scene.instantiate()
 		for child in scene.get_children():
 			# Find and bind the correct sprite and animationplayer in the packed scene
 			if child.has_meta("_ase_imported"):
-				if !sprite and child is Sprite:
+				if !sprite and child is Sprite2D:
 					sprite = child
 				if !player and child is AnimationPlayer:
 					player = child
@@ -74,14 +74,14 @@ func merge( sheet, texture, packed_scene, post_script_path, autoplay_name, aggre
 		scene.set_meta("_ase_imported", true)
 	
 	if !sprite:
-		sprite = Sprite.new()
+		sprite = Sprite2D.new()
 		sprite.set_meta("_ase_imported", true)
 		scene.add_child( sprite, true )
 	sprite.set_owner( scene )
 	
 	sprite.set_texture( texture )
 	sprite.set_region_rect( sheet.get_frame( 0 ).rect )
-	sprite.set_region( true )
+	sprite.set_region_enabled( true )
 	
 	var error
 	if sheet.is_animations_enabled():
@@ -100,7 +100,7 @@ func merge( sheet, texture, packed_scene, post_script_path, autoplay_name, aggre
 		if player.has_animation( autoplay_name ):
 			player.set_autoplay( autoplay_name )
 		elif autoplay_name != "":
-			print("Sprite sheet has no animation ", autoplay_name, " to autoplay.")
+			print("Sprite2D sheet has no animation ", autoplay_name, " to autoplay.")
 	
 	if post_script_path != "":
 		var post_script = load(post_script_path)
@@ -108,10 +108,10 @@ func merge( sheet, texture, packed_scene, post_script_path, autoplay_name, aggre
 			print(post_script_path, " is not a valid GDScript file.")
 		else:
 			post_script = post_script.new()
-			if !post_script.has_method("post_import"):
-				print(post_script_path, " has no method \"post_import\"")
+			if !post_script.has_method("_post_import"):
+				print(post_script_path, " has no method \"_post_import\"")
 			else:
-				scene = post_script.post_import(scene)
+				scene = post_script._post_import(scene)
 	
 	error = packed_scene.pack( scene )
 	_cleanup( scene )

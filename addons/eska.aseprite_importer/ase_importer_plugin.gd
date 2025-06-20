@@ -1,3 +1,4 @@
+@tool
 # Copyright (c) eska <eska@eska.me>
 # All rights reserved.
 #
@@ -24,7 +25,6 @@
 ## \TODO toggle for track stretching
 ## \TODO toggle for aggressive?
 
-tool
 extends EditorImportPlugin
 
 var Sheet = preload('sheet.gd')
@@ -33,7 +33,7 @@ var SheetToScene = preload('sheet2scene.gd')
 const ERRMSG_POSTCODE_STRF =\
 """ (Code %d)"""
 const ERRMSG_SHEET_PRETEXT_STRF =\
-"""Sprite sheet file "%s" has invalid data:\n"""
+"""Sprite2D sheet file "%s" has invalid data:\n"""
 const ERRMSG_FILE_OPEN_STRF =\
 """Failed to open %s file "%s" for import"""
 const ERRMSG_FILE_INVALID_STRF =\
@@ -44,36 +44,36 @@ const ERRMSG_MERGE_PRETEXT_STRF =\
 """Merging sprite sheet scene "%s" failed\n"""
 const WARNMSG_ANIMATION_EXPORT_STRF=\
 """File "%s" was exported without animations.
-Enable "Meta: Frame Tags" in Aseprite's "Export Sprite Sheet" dialog to export frame tags as animations"""
+Enable "Meta: Frame Tags" in Aseprite's "Export Sprite2D Sheet" dialog to export frame tags as animations"""
 
 
 const PLUGIN_NAME = "eska.aseprite_importer"
 
-func get_importer_name():
+func _get_importer_name():
 	return PLUGIN_NAME
 
-func get_visible_name():
+func _get_visible_name():
 	return "Aseprite Spritesheet"
 
-func get_recognized_extensions():
+func _get_recognized_extensions():
 	return ["json"]
 
-func get_save_extension():
+func _get_save_extension():
 	return "scn"
 
-func get_resource_type():
+func _get_resource_type():
 	return "PackedScene"
 
-func get_option_visibility(option, options):
+func _get_option_visibility(option, options):
 	return true
 
-func get_preset_count():
+func _get_preset_count():
 	return 1
 
-func get_preset_name(preset):
+func _get_preset_name(preset):
 	return "Default"
 
-func get_import_options(preset):
+func _get_import_options(preset):
 	var options =  [
 		{
 			name = "sheet_image",
@@ -101,7 +101,7 @@ func get_import_options(preset):
 func import(src, target_path, import_options, r_platform_variants, r_gen_files):
 	var json_path = src
 	var texture_path = import_options.sheet_image
-	target_path = target_path + "." + get_save_extension()
+	target_path = target_path + "." + _get_save_extension()
 	var post_script_path = import_options.post_script
 	var autoplay_name = import_options.autoplay_animation
 	
@@ -120,7 +120,9 @@ func import(src, target_path, import_options, r_platform_variants, r_gen_files):
 		return error
 	
 	var sheet = Sheet.new()
-	error = sheet.parse_json( file.get_as_text() )
+	var test_json_conv = JSON.new()
+	test_json_conv.parse( file.get_as_text() )
+	error = sheet.test_json_conv.get_data()
 	file.close()
 	if error != OK:
 		print(str( ERRMSG_SHEET_PRETEXT_STRF % json_path, sheet.get_error_message(), ERRMSG_POSTCODE_STRF % error ))
@@ -135,7 +137,7 @@ func import(src, target_path, import_options, r_platform_variants, r_gen_files):
 		print( ERRMSG_FILE_OPEN_STRF % ["texture", texture_path] )
 		return ERR_FILE_NOT_FOUND
 	var texture = load( texture_path )
-	if not typeof(texture) == TYPE_OBJECT or not texture is Texture:
+	if not typeof(texture) == TYPE_OBJECT or not texture is Texture2D:
 		print( ERRMSG_FILE_INVALID_STRF % [texture_path, "texture"] )
 		return ERR_INVALID_DATA
 	

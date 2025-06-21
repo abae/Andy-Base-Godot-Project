@@ -17,8 +17,8 @@ func _ready():
 	if Engine.is_editor_hint():
 		_update_curve( points )
 	else:
-		start_points = PackedVector2Array( points )
-		cur_points = PackedVector2Array( points )
+		start_points = points
+		cur_points = points
 		_update_curve( cur_points )
 		default_color.a = 0
 		#cur_points[1] += Vector2( -18, 0 )
@@ -27,8 +27,7 @@ func _ready():
 	$Area3D/Poly.polygon[2] = cur_points[1]
 		
 func _on_Timer_timeout():
-	pass
-#	_is_oscillating = true
+	_is_oscillating = true
 #
 #	pass # Replace with function body.
 
@@ -57,6 +56,7 @@ func _update_curve( polypoints ):
 	curve.set_point_position( 1, polypoints[2] )
 	curve.set_point_out( 0, ( polypoints[1] - polypoints[0] ) * alpha )
 	curve.set_point_in( 1, ( polypoints[1] - polypoints[2] ) * alpha )
+	queue_redraw()
 
 func _draw():
 	if curve == null: return

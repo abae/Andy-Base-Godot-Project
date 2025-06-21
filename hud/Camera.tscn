@@ -19,7 +19,6 @@ limit_left = -1215752192
 limit_top = -1215752192
 limit_right = 1215752192
 limit_bottom = 1410065408
-position_smoothing_enabled = true
 script = ExtResource("1")
 
 [node name="Limits" type="Node" parent="."]

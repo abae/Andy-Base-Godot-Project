@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwgfaf30gyyad"]
+
+[ext_resource type="PackedScene" uid="uid://bcgqbhtuexlu0" path="res://levels/Template.tscn" id="1_058q8"]
+[ext_resource type="Shader" uid="uid://d2a2pl8er5h2x" path="res://shaders/subPixel.gdshader" id="1_kf21f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbp0m"]
+shader = ExtResource("1_kf21f")
+shader_parameter/cam_offset = Vector2(0, 0)
+
+[node name="Main" type="Node"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_pbp0m")
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 490.0
+offset_bottom = 280.0
+scale = Vector2(4, 4)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(500, 290)
+render_target_update_mode = 4
+
+[node name="LevelTemplate" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_058q8")]
+texture_filter = 1

@@ -103,7 +103,7 @@ func squash_n_stretch():
 func emit_dust(pos):
 	$DustTimer.start()
 	var dust = Dust.instantiate()
-	level.get_node("Particles").add_child(dust)
+	get_node("../../Particles").add_child(dust)
 	dust.scale.x = sign(pos.x - global_position.x)
 	dust.global_position = pos
 

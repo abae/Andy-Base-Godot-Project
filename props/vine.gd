@@ -15,6 +15,7 @@ func _ready():
 	curve.add_point( Vector2.ZERO )
 	vel.x = 100
 	if Engine.is_editor_hint():
+		cur_points = points
 		_update_curve( points )
 	else:
 		start_points = points

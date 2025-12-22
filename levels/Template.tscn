@@ -1,30 +1,39 @@
-[gd_scene load_steps=9 format=4 uid="uid://bcgqbhtuexlu0"]
+[gd_scene load_steps=6 format=3 uid="uid://bcgqbhtuexlu0"]
 
 [ext_resource type="Script" uid="uid://byx3ky8ju6p84" path="res://levels/Level.gd" id="1"]
 [ext_resource type="Script" uid="uid://bbdpmmty41n4k" path="res://hud/Pause.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://hjluy17uh3mj" path="res://hud/Camera.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://c2hs78rffuskn" path="res://art/testWall.png" id="4"]
 [ext_resource type="TileSet" uid="uid://f1himbgnshnp" path="res://props/testWall.tres" id="4_lt51o"]
-[ext_resource type="Texture2D" uid="uid://3n5vrhp8g8tf" path="res://art/radial_gradient.png" id="5"]
-[ext_resource type="PackedScene" uid="uid://c8iyyvd72x8l6" path="res://props/vine.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://props/Checkpoint.tscn" id="7"]
 
 [node name="LevelTemplate" type="Node2D"]
 script = ExtResource("1")
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3")]
-position = Vector2(213.562, 137.146)
+position = Vector2(1, 1)
+offset = Vector2(0, 0)
 
 [node name="TopLeft" parent="PlayerCamera/Limits" index="0"]
 position = Vector2(-339.7, -264.715)
 
+[node name="TopBound" parent="PlayerCamera/Limits/TopLeft" index="0"]
+position = Vector2(4, -996)
+
 [node name="BottomRight" parent="PlayerCamera/Limits" index="1"]
 position = Vector2(748.25, 487.073)
+
+[node name="BottomBound" parent="PlayerCamera/Limits/BottomRight" index="0"]
+position = Vector2(186.75, 3587.927)
+
+[node name="RightBound" parent="PlayerCamera/Limits/BottomRight" index="1"]
+position = Vector2(5058.75, 58.927002)
 
 [node name="Background" type="ParallaxBackground" parent="."]
 
 [node name="testWall" type="Sprite2D" parent="."]
 self_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(3, 2)
+scale = Vector2(5.18125, 2.7)
 texture = ExtResource("4")
 centered = false
 
@@ -33,38 +42,9 @@ centered = false
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment"]
-tile_map_data = PackedByteArray("AAD9/woAAAAIAAkAAAD9/wsAAAAIAAoAAAD+/woAAAAJAAkAAAD+/wsAAAAJAAoAAAD//woAAAAKAAkAAAD//wsAAAAKAAoAAAAAAAoAAAAIAAkAAAAAAAsAAAAIAAoAAAABAAoAAAAJAAkAAAABAAsAAAAJAAoAAAACAAoAAAAKAAkAAAACAAsAAAAKAAoAAAADAAoAAAAIAAkAAAADAAsAAAAIAAoAAAAEAAoAAAAJAAkAAAAEAAsAAAAJAAoAAAAFAAoAAAAKAAkAAAAFAAsAAAAIAAkAAAADAAwAAAAIAAkAAAADAA0AAAAIAAoAAAAEAAwAAAAJAAkAAAAEAA0AAAAJAAoAAAAFAAwAAAAIAAoAAAAFAA0AAAAKAAoAAAAGAAwAAAAJAAoAAAAGAA0AAAAIAAoAAAAHAAwAAAAKAAoAAAAHAA0AAAAJAAoAAAAIAAwAAAAIAAoAAAAIAA0AAAAKAAoAAAAJAAwAAAAJAAoAAAAJAA0AAAAIAAoAAAAKAAwAAAAKAAoAAAAKAA0AAAAJAAoAAAALAAwAAAAIAAoAAAALAA0AAAAKAAoAAAAMAAwAAAAJAAoAAAAMAA0AAAAIAAoAAAANAAwAAAAKAAoAAAANAA0AAAAJAAoAAAAOAAwAAAAIAAoAAAAOAA0AAAAKAAoAAAAPAAwAAAAJAAoAAAAPAA0AAAAIAAoAAAAQAAwAAAAKAAoAAAAQAA0AAAAJAAoAAAARAAwAAAAKAAoAAAARAA0AAAAKAAoAAAASAAwAAAAIAAkAAAASAA0AAAAIAAoAAAATAAwAAAAJAAkAAAATAA0AAAAJAAoAAAAUAAwAAAAKAAkAAAAUAA0AAAAKAAoAAAAVAAwAAAAIAAkAAAAVAA0AAAAIAAoAAAAWAAwAAAAJAAkAAAAWAA0AAAAJAAoAAAAXAAwAAAAKAAkAAAAXAA0AAAAKAAoAAAAVAAoAAAAJAAoAAAAVAAsAAAAIAAoAAAAWAAoAAAAKAAoAAAAWAAsAAAAJAAoAAAAXAAoAAAAKAAkAAAAXAAsAAAAKAAoAAAAVAAgAAAAIAAkAAAAVAAkAAAAJAAkAAAAWAAgAAAAJAAkAAAAWAAkAAAAKAAkAAAAXAAgAAAAKAAkAAAAXAAkAAAAKAAoAAAASAAoAAAAIAAkAAAASAAsAAAAIAAoAAAATAAoAAAAJAAkAAAATAAsAAAAJAAoAAAAUAAoAAAAIAAoAAAAUAAsAAAAKAAoAAAAPAAsAAAAJAAkAAAAQAAsAAAAKAAkAAAARAAsAAAAKAAoAAAAUAAkAAAAKAAoAAAAGAAsAAAAJAAkAAAAHAAsAAAAKAAkAAAAGAAkAAAAIAAkAAAAGAAoAAAAIAAoAAAAHAAkAAAAJAAkAAAAHAAoAAAAJAAoAAAAIAAkAAAAKAAkAAAAIAAoAAAAKAAoAAAAJAAkAAAAIAAkAAAAJAAoAAAAIAAoAAAAKAAkAAAAJAAkAAAAKAAoAAAAJAAoAAAALAAkAAAAKAAkAAAALAAoAAAAKAAoAAAAMAAkAAAAIAAkAAAAMAAoAAAAIAAoAAAANAAkAAAAJAAkAAAANAAoAAAAJAAoAAAAOAAkAAAAKAAkAAAAOAAoAAAAKAAoAAAAPAAgAAAAIAAkAAAAPAAkAAAAIAAoAAAAQAAgAAAAJAAkAAAAQAAkAAAAJAAoAAAARAAgAAAAKAAkAAAARAAkAAAAKAAoAAAASAAYAAAAIAAkAAAASAAcAAAAIAAoAAAATAAYAAAAJAAkAAAATAAcAAAAJAAoAAAAUAAYAAAAKAAkAAAAUAAcAAAAKAAoAAAASAAgAAAAIAAkAAAASAAkAAAAIAAoAAAATAAgAAAAJAAkAAAATAAkAAAAJAAoAAAAUAAgAAAAKAAkAAAAPAAoAAAAIAAkAAAAQAAoAAAAJAAkAAAARAAoAAAAKAAkAAAAIAAsAAAAIAAkAAAAJAAsAAAAJAAkAAAAKAAsAAAAKAAkAAAALAAsAAAAIAAkAAAAMAAsAAAAJAAkAAAANAAsAAAAKAAkAAAAOAAsAAAAIAAkAAAA=")
 tile_set = ExtResource("4_lt51o")
 
 [node name="Props" type="Node2D" parent="."]
-
-[node name="PointLight2D" type="PointLight2D" parent="Props"]
-position = Vector2(233, 121)
-color = Color(0.976471, 0.913725, 0, 1)
-energy = 0.5
-shadow_enabled = true
-texture = ExtResource("5")
-
-[node name="Light2D2" type="PointLight2D" parent="Props"]
-position = Vector2(257, 79)
-color = Color(0.47451, 1, 0.180392, 1)
-energy = 0.2
-shadow_enabled = true
-texture = ExtResource("5")
-
-[node name="vine" parent="Props" instance=ExtResource("6")]
-position = Vector2(258.375, 31.75)
-points = PackedVector2Array(0, 0, 22.625, 65.25, 77.625, 47.5)
-
-[node name="vine2" parent="Props" instance=ExtResource("6")]
-position = Vector2(133.125, 55.875)
-points = PackedVector2Array(7.125, 40.25, 36.75, 65.75, 63.625, 40.125)
-
-[node name="Checkpoint" parent="Props" instance=ExtResource("7")]
-position = Vector2(120, 144)
-
-[node name="Checkpoint2" parent="Props" instance=ExtResource("7")]
-position = Vector2(256, 128)
 
 [node name="Projectiles" type="Node2D" parent="."]
 

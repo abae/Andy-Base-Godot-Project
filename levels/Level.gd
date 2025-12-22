@@ -18,4 +18,3 @@ func create_player(vec):
 	$Players.add_child(player)
 	God.player = player
 	player.position = vec
-	player.get_node("Hair").init_position()

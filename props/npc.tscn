@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwurt43dk11l"]
+[gd_scene load_steps=5 format=3 uid="uid://6jfy5w6icw6g"]
 
-[ext_resource type="Script" uid="uid://ciw0bmh3j216j" path="res://props/npc.gd" id="1_whwuj"]
+[ext_resource type="Script" path="res://props/npc.gd" id="1_whwuj"]
 [ext_resource type="Texture2D" uid="uid://nnpliu00ebe3" path="res://icon.png" id="2_0vnn2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yp8fw"]
-radius = 48.09366
+radius = 48.0937
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1b84k"]
-radius = 157.05095
+radius = 157.051
 
 [node name="npc" type="CharacterBody2D"]
 motion_mode = 1
@@ -15,9 +15,10 @@ script = ExtResource("1_whwuj")
 dialog_timeline = "testTimeline"
 
 [node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(1, 0.12156863, 1, 1)
+modulate = Color(1, 0.121569, 1, 1)
+use_parent_material = true
 position = Vector2(2, -2)
-scale = Vector2(1.390625, 1.40625)
+scale = Vector2(1.39062, 1.40625)
 texture = ExtResource("2_0vnn2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

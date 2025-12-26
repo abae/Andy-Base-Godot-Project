@@ -8,6 +8,12 @@ extends Node2D
 @export var start_pin: bool = true
 @export var end_pin: bool = true
 @export var offset: Vector2 = Vector2(0,0)
+@export var end_offset: Vector2 = Vector2(0, 0)
+@export var tightness: int = 3
+@export var target_distance: float = 5.0
+@export var spring_k: float = 10.0 # spring stiffness (force per unit length)
+@export var spring_damping: float = 0.9 # applied to the implicit velocity when using springs
+@export var max_spring_force: float = 500.0
 
 var pos: PackedVector2Array
 var pos_ex: PackedVector2Array
@@ -35,13 +41,15 @@ func init_position():
 
 func _process(delta):
 	pos[0] = get_parent().position
+	if end_pin:
+		pos[count - 1] = get_parent().position + end_offset - offset
 	update_points(delta)
-	update_distance()
-	update_distance()	#Repeat to get tighter rope
-	update_distance()
+	for i in range(tightness):
+		update_distance()
 	for i in range(count):
 		pos[i] -= get_parent().position - offset
 	$Line2D.points = pos
+	$Line2D2.points = pos
 	for i in range(count):
 		pos[i] += get_parent().position - offset
 
@@ -49,16 +57,40 @@ func update_points(delta):
 	for i in range (count):
 		# not first and last || first if not pinned || last if not pinned
 		if (i!=0 && i!=count-1) || (i==0 && !start_pin) || (i==count-1 && !end_pin):
-			var vec2 = (pos[i] - pos_ex[i]) * friction
+			var vec2 = (pos[i] - pos_ex[i]) * friction	
 			pos_ex[i] = pos[i]
-			pos[i] += vec2 + (gravity * delta)
+			# Compute spring forces from neighbors (damped Hooke springs)
+			var spring_force := Vector2.ZERO
+			if i > 0:
+				var dprev = pos[i] - pos[i-1]
+				var lprev = dprev.length()
+				if lprev - target_distance != 0:
+					spring_force += -((lprev - target_distance) * dprev / lprev) * spring_k
+			if i < count-1:
+				var dnext = pos[i] - pos[i+1]
+				var lnext = dnext.length()
+				if lnext - target_distance != 0:
+					spring_force += -((lnext - target_distance) * dnext / lnext) * spring_k
+
+			# Apply spring damping to the implicit velocity to stabilize oscillation
+			vec2 *= spring_damping
+
+			# Integrate using Verlet-style acceleration term (use delta^2).
+			# Treat spring_force as acceleration (mass = 1). Clamp the force
+			# magnitude to avoid runaway accelerations.
+			if spring_force.length() > max_spring_force:
+				spring_force = spring_force.normalized() * max_spring_force
+
+			var accel := gravity + spring_force
+			# Verlet-style step: pos += velocity_term + accel * dt^2
+			pos[i] += (vec2 * delta) + (accel * (delta * delta))
 
 func update_distance():
 	for i in range(count):
 		if i == count-1:
 			return
 		var distance = pos[i].distance_to(pos[i+1])
-		var difference = constrain - distance
+		var difference = target_distance - distance
 		var percent = difference / distance
 		var vec2 = pos[i+1] - pos[i]
 		if i == 0:

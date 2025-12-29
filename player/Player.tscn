@@ -1,26 +1,21 @@
 [gd_scene load_steps=8 format=3 uid="uid://bjxbdu3okybl5"]
 
 [ext_resource type="PackedScene" path="res://control/virtual/Hurtbox.tscn" id="1"]
-[ext_resource type="Shader" uid="uid://dajqwh5wc5p0y" path="res://shaders/outline.gdshader" id="1_x8kxw"]
+[ext_resource type="Shader" uid="uid://dq58ydpet1n5c" path="res://shaders/grass_cover.gdshader" id="1_x8kxw"]
 [ext_resource type="Script" uid="uid://bn7be5et2fadn" path="res://player/Player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dreu0r4nkqe34" path="res://control/virtual/Hitbox.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://b80vqnrnqbpb6" path="res://props/Verlet.tscn" id="4_83hs8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aqcbf"]
 shader = ExtResource("1_x8kxw")
-shader_parameter/color = Color(0.180392, 0.133333, 0.184314, 1)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 1
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-shader_parameter/number_of_images = Vector2(1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8kxw"]
-radius = 35.0
-height = 78.0
+radius = 20.0
+height = 100.0
 
 [node name="Player" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_aqcbf")
+position = Vector2(6, 0)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("2")
@@ -28,18 +23,7 @@ MAX_SPEED = 600
 ACCEL = 2500
 FRICT = 3000
 
-[node name="CharSprite" type="Sprite2D" parent="."]
-use_parent_material = true
-
-[node name="CharViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(1024, 1024)
-
-[node name="RenderRoot" type="Node2D" parent="CharViewport"]
-
-[node name="Camera2D" type="Camera2D" parent="CharViewport/RenderRoot"]
-
-[node name="Tail" parent="CharViewport/RenderRoot" instance=ExtResource("4_83hs8")]
+[node name="Tail" parent="." instance=ExtResource("4_83hs8")]
 length = 7.0
 gravity = Vector2(0, 0)
 friction = 0.0
@@ -49,8 +33,8 @@ target_distance = 20.0
 spring_k = 500.0
 spring_damping = -0.1
 
-[node name="Line2D" parent="CharViewport/RenderRoot/Tail" index="0"]
-z_index = -6
+[node name="Line2D" parent="Tail" index="0"]
+z_index = -4000
 z_as_relative = false
 width = 30.0
 default_color = Color(0.929412, 0.501961, 0.6, 1)
@@ -58,8 +42,8 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Line2D2" type="Line2D" parent="CharViewport/RenderRoot/Tail"]
-z_index = -7
+[node name="Line2D2" type="Line2D" parent="Tail"]
+z_index = -4001
 points = PackedVector2Array(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 27, 0, 28, 0, 29, 0, 30, 0, 31, 0, 32, 0, 33, 0, 34, 0, 35, 0, 36, 0, 37, 0, 38, 0, 39, 0, 40, 0, 41, 0, 42, 0, 43, 0, 44, 0, 45, 0, 46, 0, 47, 0, 48, 0, 49, 0, 50, 0, 51, 0, 52, 0, 53, 0, 54, 0, 55, 0, 56, 0, 57, 0, 58, 0, 59, 0, 60, 0, 61, 0, 62, 0, 63, 0, 64, 0, 65, 0, 66, 0, 67, 0, 68, 0, 69, 0, 70, 0, 71, 0, 72, 0, 73, 0, 74, 0, 75, 0, 76, 0, 77, 0, 78, 0, 79, 0, 80, 0, 81, 0, 82, 0, 83, 0, 84, 0, 85, 0, 86, 0, 87, 0, 88, 0, 89, 0, 90, 0, 91, 0, 92, 0, 93, 0, 94, 0, 95, 0, 96, 0, 97, 0, 98, 0, 99, 0)
 width = 40.0
 default_color = Color(0, 0, 0, 1)
@@ -67,30 +51,30 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Neck" parent="CharViewport/RenderRoot" instance=ExtResource("4_83hs8")]
+[node name="Neck" parent="." instance=ExtResource("4_83hs8")]
 length = 3.0
 gravity = Vector2(0, 900)
 offset = Vector2(0, -20)
 end_offset = Vector2(-30, 0)
 spring_k = 2.0
 
-[node name="Line2D" parent="CharViewport/RenderRoot/Neck" index="0"]
-z_index = -4
+[node name="Line2D" parent="Neck" index="0"]
+z_index = -3
 width = 30.0
 default_color = Color(0.811765, 0.396078, 0.498039, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Line2D2" type="Line2D" parent="CharViewport/RenderRoot/Neck"]
-z_index = -5
+[node name="Line2D2" type="Line2D" parent="Neck"]
+z_index = -4
 points = PackedVector2Array(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 27, 0, 28, 0, 29, 0, 30, 0, 31, 0, 32, 0, 33, 0, 34, 0, 35, 0, 36, 0, 37, 0, 38, 0, 39, 0, 40, 0, 41, 0, 42, 0, 43, 0, 44, 0, 45, 0, 46, 0, 47, 0, 48, 0, 49, 0, 50, 0, 51, 0, 52, 0, 53, 0, 54, 0, 55, 0, 56, 0, 57, 0, 58, 0, 59, 0, 60, 0, 61, 0, 62, 0, 63, 0, 64, 0, 65, 0, 66, 0, 67, 0, 68, 0, 69, 0, 70, 0, 71, 0, 72, 0, 73, 0, 74, 0, 75, 0, 76, 0, 77, 0, 78, 0, 79, 0, 80, 0, 81, 0, 82, 0, 83, 0, 84, 0, 85, 0, 86, 0, 87, 0, 88, 0, 89, 0, 90, 0, 91, 0, 92, 0, 93, 0, 94, 0, 95, 0, 96, 0, 97, 0, 98, 0, 99, 0)
 width = 40.0
 default_color = Color(0, 0, 0, 1)
 joint_mode = 2
 begin_cap_mode = 2
 
-[node name="Head" parent="CharViewport/RenderRoot" instance=ExtResource("4_83hs8")]
+[node name="Head" parent="." instance=ExtResource("4_83hs8")]
 position = Vector2(-1, 0)
 length = 8.0
 gravity = Vector2(0, -9000)
@@ -99,26 +83,25 @@ end_offset = Vector2(0, -20)
 tightness = 6
 spring_k = 2.0
 
-[node name="Line2D" parent="CharViewport/RenderRoot/Head" index="0"]
-z_index = -2
+[node name="Line2D" parent="Head" index="0"]
+width = 40.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="Head"]
+position = Vector2(1, 2)
+points = PackedVector2Array(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 27, 0, 28, 0, 29, 0, 30, 0, 31, 0, 32, 0, 33, 0, 34, 0, 35, 0, 36, 0, 37, 0, 38, 0, 39, 0, 40, 0, 41, 0, 42, 0, 43, 0, 44, 0, 45, 0, 46, 0, 47, 0, 48, 0, 49, 0, 50, 0, 51, 0, 52, 0, 53, 0, 54, 0, 55, 0, 56, 0, 57, 0, 58, 0, 59, 0, 60, 0, 61, 0, 62, 0, 63, 0, 64, 0, 65, 0, 66, 0, 67, 0, 68, 0, 69, 0, 70, 0, 71, 0, 72, 0, 73, 0, 74, 0, 75, 0, 76, 0, 77, 0, 78, 0, 79, 0, 80, 0, 81, 0, 82, 0, 83, 0, 84, 0, 85, 0, 86, 0, 87, 0, 88, 0, 89, 0, 90, 0, 91, 0, 92, 0, 93, 0, 94, 0, 95, 0, 96, 0, 97, 0, 98, 0, 99, 0)
 width = 30.0
 default_color = Color(0.929412, 0.501961, 0.6, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Line2D2" type="Line2D" parent="CharViewport/RenderRoot/Head"]
-z_index = -3
-points = PackedVector2Array(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 27, 0, 28, 0, 29, 0, 30, 0, 31, 0, 32, 0, 33, 0, 34, 0, 35, 0, 36, 0, 37, 0, 38, 0, 39, 0, 40, 0, 41, 0, 42, 0, 43, 0, 44, 0, 45, 0, 46, 0, 47, 0, 48, 0, 49, 0, 50, 0, 51, 0, 52, 0, 53, 0, 54, 0, 55, 0, 56, 0, 57, 0, 58, 0, 59, 0, 60, 0, 61, 0, 62, 0, 63, 0, 64, 0, 65, 0, 66, 0, 67, 0, 68, 0, 69, 0, 70, 0, 71, 0, 72, 0, 73, 0, 74, 0, 75, 0, 76, 0, 77, 0, 78, 0, 79, 0, 80, 0, 81, 0, 82, 0, 83, 0, 84, 0, 85, 0, 86, 0, 87, 0, 88, 0, 89, 0, 90, 0, 91, 0, 92, 0, 93, 0, 94, 0, 95, 0, 96, 0, 97, 0, 98, 0, 99, 0)
-width = 40.0
-default_color = Color(0, 0, 0, 1)
-joint_mode = 2
-begin_cap_mode = 2
-
-[node name="Eyes" type="Node2D" parent="CharViewport/RenderRoot"]
+[node name="Eyes" type="Node2D" parent="."]
 position = Vector2(35, -60)
 
-[node name="Line2D" type="Line2D" parent="CharViewport/RenderRoot/Eyes"]
+[node name="Line2D" type="Line2D" parent="Eyes"]
 position = Vector2(0, 10)
 points = PackedVector2Array(0, 0, 1, 0)
 width = 12.0
@@ -127,7 +110,7 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Line2D2" type="Line2D" parent="CharViewport/RenderRoot/Eyes"]
+[node name="Line2D2" type="Line2D" parent="Eyes"]
 position = Vector2(0, -10)
 points = PackedVector2Array(0, 0, 1, 0)
 width = 12.0
@@ -136,9 +119,26 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
+[node name="Line2D3" type="Line2D" parent="Eyes"]
+position = Vector2(4.315, -12.475)
+points = PackedVector2Array(0, 0, 0.1, 0)
+width = 3.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D4" type="Line2D" parent="Eyes"]
+position = Vector2(0, 10)
+points = PackedVector2Array(0, 0, 0.1, 0)
+width = 2.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 modulate = Color(0, 1, 0, 0.780392)
-position = Vector2(0, -31)
+position = Vector2(0, -1)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_x8kxw")
 
 [node name="Hitbox" parent="." instance=ExtResource("3")]
@@ -150,6 +150,6 @@ position = Vector2(-0.0220976, -0.0662918)
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 
-[editable path="CharViewport/RenderRoot/Tail"]
-[editable path="CharViewport/RenderRoot/Neck"]
-[editable path="CharViewport/RenderRoot/Head"]
+[editable path="Tail"]
+[editable path="Neck"]
+[editable path="Head"]

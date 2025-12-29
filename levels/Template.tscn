@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://byx3ky8ju6p84" path="res://levels/Level.gd" id="1"]
 [ext_resource type="Script" uid="uid://bbdpmmty41n4k" path="res://hud/Pause.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://hjluy17uh3mj" path="res://hud/Camera.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://c2hs78rffuskn" path="res://art/testWall.png" id="4"]
 [ext_resource type="TileSet" uid="uid://f1himbgnshnp" path="res://props/testWall.tres" id="4_lt51o"]
 [ext_resource type="PackedScene" uid="uid://6jfy5w6icw6g" path="res://props/npc.tscn" id="5_8npgn"]
 [ext_resource type="Shader" uid="uid://dajqwh5wc5p0y" path="res://shaders/outline.gdshader" id="6_ydry8"]
 [ext_resource type="PackedScene" uid="uid://b0bvpsm62f6v3" path="res://props/building.tscn" id="7_lt51o"]
+[ext_resource type="PackedScene" uid="uid://m0bix83s5waw" path="res://props/waypoint.tscn" id="7_niivj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lt51o"]
 shader = ExtResource("6_ydry8")
@@ -43,17 +43,10 @@ position = Vector2(1001.75, 359.927)
 
 [node name="Background" type="ParallaxBackground" parent="."]
 
-[node name="testWall" type="Sprite2D" parent="."]
-self_modulate = Color(0.68, 0.68, 0.68, 1)
-position = Vector2(-841, -441)
-scale = Vector2(5.18125, 2.7)
-texture = ExtResource("4")
-centered = false
-
 [node name="Particles" type="Node2D" parent="."]
 
 [node name="Environment" type="Node2D" parent="."]
-y_sort_enabled = true
+z_index = -4000
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Environment"]
 tile_set = ExtResource("4_lt51o")
@@ -61,12 +54,28 @@ tile_set = ExtResource("4_lt51o")
 [node name="Props" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="npc" parent="Props" instance=ExtResource("5_8npgn")]
+[node name="npc" parent="Props" node_paths=PackedStringArray("start_waypoint") instance=ExtResource("5_8npgn")]
 material = SubResource("ShaderMaterial_lt51o")
-position = Vector2(522, 318)
+position = Vector2(364, 244)
+start_waypoint = NodePath("../waypoint")
 
 [node name="Building" parent="Props" instance=ExtResource("7_lt51o")]
 position = Vector2(577, 190)
+
+[node name="waypoint" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(363, 244)
+connections = [NodePath("../waypoint2"), NodePath("../waypoint3")]
+facing_dir = null
+
+[node name="waypoint2" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(964, 351)
+connections = [NodePath("../waypoint")]
+facing_dir = null
+
+[node name="waypoint3" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(187, 430)
+connections = [NodePath("../waypoint")]
+facing_dir = null
 
 [node name="Projectiles" type="Node2D" parent="."]
 
@@ -96,3 +105,4 @@ anchor_bottom = 1.0
 color = Color(0, 0, 0, 0.376471)
 
 [editable path="PlayerCamera"]
+[editable path="Props/npc"]

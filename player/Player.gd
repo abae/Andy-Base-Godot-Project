@@ -53,38 +53,26 @@ func _ready():
 				if not _ts.is_connected('animation_textbox_hide', Callable(self, '_on_dialogue_hide')):
 					_ts.animation_textbox_hide.connect(Callable(self, '_on_dialogue_hide'))
 
-	# If we have a CharViewport and CharSprite, assign the viewport texture to the sprite so
-	# the outline shader (on the Player material) can be applied to the rendered image.
-	if has_node("CharViewport") and has_node("CharSprite"):
-		var vp = $CharViewport
-		var spr = $CharSprite
-		# Defer assignment one frame to ensure the viewport has initialized
-		call_deferred("_assign_viewport_texture", vp, spr)
+	if has_node("Tail"):
+		tail = get_node("Tail")
+		tail_origin = tail.get("offset")
+		tail_offset = tail_origin
 
-		if vp.has_node("RenderRoot/Tail"):
-			tail = vp.get_node("RenderRoot/Tail")
-			tail_origin = tail.get("offset")
-			tail_offset = tail_origin
+	if has_node("Neck"):
+		neck = get_node("Neck")
+		neck_origin = neck.get("offset")
+		neck_offset = neck_origin
 
-		if vp.has_node("RenderRoot/Neck"):
-			neck = vp.get_node("RenderRoot/Neck")
-			neck_origin = neck.get("offset")
-			neck_offset = neck_origin
+	if has_node("Head"):
+		head = get_node("Head")
+		head_origin = head.get("offset")
+		head_offset = head_origin
 
-		if vp.has_node("RenderRoot/Head"):
-			head = vp.get_node("RenderRoot/Head")
-			head_origin = head.get("offset")
-			head_offset = head_origin
-
-		if vp.has_node("RenderRoot/Eyes"):
-			eyes = vp.get_node("RenderRoot/Eyes")
-			eyes_origin = eyes.get("position")
-			eyes_offset = eyes_origin
+	if has_node("Eyes"):
+		eyes = get_node("Eyes")
+		eyes_origin = eyes.get("position")
+		eyes_offset = eyes_origin
 	_blink_animation()
-
-func _assign_viewport_texture(vp: Viewport, spr: Sprite2D) -> void:
-	if vp and spr:
-		spr.texture = vp.get_texture()
 
 func _physics_process(delta):
 	match state:
@@ -113,18 +101,9 @@ func move_state(delta):
 	#calculate collisions
 	move()
 
-	# Keep the SubViewport's RenderRoot and Camera centered on this player so
-	# the instanced visuals inside the SubViewport follow the player's movement.
-	var vp = get_node_or_null("CharViewport")
-	if not vp:
-		return
-	var render_root = vp.get_node_or_null("RenderRoot")
-	if render_root:
-		render_root.position = global_position
-
 	var wave_offset = 0.0
-	if vel != Vector2.ZERO:
-		sin_wave += 0.2
+	if vel != Vector2.ZERO && get_last_motion().length() > 0.01:
+		sin_wave += get_last_motion().length()/10.0 * 0.2
 		wave_offset = -sin(sin_wave) * 20.0
 	else:
 		sin_wave = 0.0
@@ -144,6 +123,9 @@ func move_state(delta):
 	if eyes:
 		eyes.position = lerp(eyes.position, Vector2(0, eyes_origin.y) + (eyes_origin.x + wave_offset) * p_dir, 0.1)
 		eyes.rotation = (p_dir.angle())
+		var eye_highlight_offset = Vector2(4.3, -2.5)
+		eyes.get_node("Line2D3").position = eyes.get_node("Line2D").position + eye_highlight_offset.rotated(-p_dir.angle())
+		eyes.get_node("Line2D4").position = eyes.get_node("Line2D2").position + eye_highlight_offset.rotated(-p_dir.angle())
 
 func interact():
 	#interact with objects
@@ -186,12 +168,15 @@ func _blink_animation() -> void:
 	if eyes:
 		var eye_blink_width = 3.0
 		var eye_blink_length = 10.0
+		var eye_hightlight_width = 4.0
 		eyes.get_node("Line2D").width = eye_blink_width
 		eyes.get_node("Line2D").points[0].y -= eye_blink_length / 2
 		eyes.get_node("Line2D").points[1].y += eye_blink_length / 2
 		eyes.get_node("Line2D2").width = eye_blink_width
 		eyes.get_node("Line2D2").points[0].y -= eye_blink_length / 2
 		eyes.get_node("Line2D2").points[1].y += eye_blink_length / 2
+		eyes.get_node("Line2D3").width = 0.0
+		eyes.get_node("Line2D4").width = 0.0
 		await get_tree().create_timer(0.1).timeout
 		eyes.get_node("Line2D").width = 12.0
 		eyes.get_node("Line2D").points[0].y += eye_blink_length / 2
@@ -199,5 +184,7 @@ func _blink_animation() -> void:
 		eyes.get_node("Line2D2").width = 12.0
 		eyes.get_node("Line2D2").points[0].y += eye_blink_length / 2
 		eyes.get_node("Line2D2").points[1].y -= eye_blink_length / 2
+		eyes.get_node("Line2D3").width = eye_hightlight_width
+		eyes.get_node("Line2D4").width = eye_hightlight_width
 		await get_tree().create_timer(2.0 + randf() * 1.0).timeout
 		_blink_animation()

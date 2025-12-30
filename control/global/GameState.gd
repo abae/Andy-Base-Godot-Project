@@ -4,6 +4,8 @@ extends Node
 
 @onready var playerStats = $PlayerStats
 
+@export var debug = true
+
 var transportPosition = null
 var checkpointPosition := Vector2(0,0)
 var savePath = "user://gameState.dat"

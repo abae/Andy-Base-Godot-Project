@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://nnpliu00ebe3" path="res://icon.png" id="2_0vnn2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yp8fw"]
-radius = 48.0937
+radius = 23.769728
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1b84k"]
 radius = 157.051
@@ -16,7 +16,6 @@ dialog_timeline = "testTimeline"
 
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(1, 0.121569, 1, 1)
-use_parent_material = true
 position = Vector2(2, -2)
 scale = Vector2(1.39062, 1.40625)
 texture = ExtResource("2_0vnn2")
@@ -25,8 +24,16 @@ texture = ExtResource("2_0vnn2")
 shape = SubResource("CircleShape2D_yp8fw")
 
 [node name="InteractArea" type="Area2D" parent="."]
+position = Vector2(1, 1)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_1b84k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 0.043137256, 1, 1)
+position = Vector2(-1.9073486e-06, -2.999998)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("2_0vnn2")

@@ -23,4 +23,3 @@ func cam2player():
 	actualCamPos = actualCamPos.lerp(player.position-Vector2(0, 0), 0.2)
 	camera.global_position = actualCamPos
 	camera.zoomTarget = 1.0
-

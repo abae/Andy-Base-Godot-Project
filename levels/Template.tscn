@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcgqbhtuexlu0"]
+[gd_scene load_steps=11 format=3 uid="uid://bcgqbhtuexlu0"]
 
 [ext_resource type="Script" uid="uid://byx3ky8ju6p84" path="res://levels/Level.gd" id="1"]
 [ext_resource type="Script" uid="uid://bbdpmmty41n4k" path="res://hud/Pause.gd" id="2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://dajqwh5wc5p0y" path="res://shaders/outline.gdshader" id="6_ydry8"]
 [ext_resource type="PackedScene" uid="uid://b0bvpsm62f6v3" path="res://props/building.tscn" id="7_lt51o"]
 [ext_resource type="PackedScene" uid="uid://m0bix83s5waw" path="res://props/waypoint.tscn" id="7_niivj"]
+[ext_resource type="Texture2D" uid="uid://ckp6iuvqrjnt" path="res://art/Untitled_Artwork-11.png" id="7_vt36h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lt51o"]
 shader = ExtResource("6_ydry8")
@@ -27,13 +28,13 @@ position = Vector2(2, 2)
 anchor_mode = 1
 
 [node name="TopLeft" parent="PlayerCamera/Limits" index="0"]
-position = Vector2(-2920, -1763)
+position = Vector2(-369, -364)
 
 [node name="TopBound" parent="PlayerCamera/Limits/TopLeft" index="0"]
 position = Vector2(4, -996)
 
 [node name="BottomRight" parent="PlayerCamera/Limits" index="1"]
-position = Vector2(8933, 5445)
+position = Vector2(2185, 1783)
 
 [node name="BottomBound" parent="PlayerCamera/Limits/BottomRight" index="0"]
 position = Vector2(120.75, 1001.93)
@@ -56,26 +57,109 @@ y_sort_enabled = true
 
 [node name="npc" parent="Props" node_paths=PackedStringArray("start_waypoint") instance=ExtResource("5_8npgn")]
 material = SubResource("ShaderMaterial_lt51o")
-position = Vector2(364, 244)
-start_waypoint = NodePath("../waypoint")
+position = Vector2(103, 1189)
+start_waypoint = NodePath("../waypoint12")
+
+[node name="npc2" parent="Props" node_paths=PackedStringArray("start_waypoint") instance=ExtResource("5_8npgn")]
+material = SubResource("ShaderMaterial_lt51o")
+position = Vector2(320, 1203)
+start_waypoint = NodePath("../waypoint13")
+
+[node name="npc3" parent="Props" node_paths=PackedStringArray("start_waypoint") instance=ExtResource("5_8npgn")]
+material = SubResource("ShaderMaterial_lt51o")
+position = Vector2(559, 1232)
+start_waypoint = NodePath("../waypoint14")
+
+[node name="npc4" parent="Props" node_paths=PackedStringArray("start_waypoint") instance=ExtResource("5_8npgn")]
+material = SubResource("ShaderMaterial_lt51o")
+position = Vector2(813, 1246)
+start_waypoint = NodePath("../waypoint15")
+
+[node name="npc5" parent="Props" node_paths=PackedStringArray("start_waypoint") instance=ExtResource("5_8npgn")]
+material = SubResource("ShaderMaterial_lt51o")
+position = Vector2(1124, 1238)
+start_waypoint = NodePath("../waypoint10")
+
+[node name="npc6" parent="Props" node_paths=PackedStringArray("start_waypoint") instance=ExtResource("5_8npgn")]
+material = SubResource("ShaderMaterial_lt51o")
+position = Vector2(1413, 1220)
+start_waypoint = NodePath("../waypoint9")
+
+[node name="npc7" parent="Props" node_paths=PackedStringArray("start_waypoint") instance=ExtResource("5_8npgn")]
+material = SubResource("ShaderMaterial_lt51o")
+position = Vector2(1686, 1198)
+start_waypoint = NodePath("../waypoint11")
 
 [node name="Building" parent="Props" instance=ExtResource("7_lt51o")]
-position = Vector2(577, 190)
+
+[node name="Sprite2D" parent="Props/Building" index="0"]
+position = Vector2(855.0001, 550)
+scale = Vector2(1, 1)
+texture = ExtResource("7_vt36h")
 
 [node name="waypoint" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
-position = Vector2(363, 244)
-connections = [NodePath("../waypoint2"), NodePath("../waypoint3")]
-facing_dir = null
+position = Vector2(295, 533)
+connections = [NodePath("../waypoint2"), NodePath("../waypoint9"), NodePath("../waypoint3")]
 
 [node name="waypoint2" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
-position = Vector2(964, 351)
-connections = [NodePath("../waypoint")]
-facing_dir = null
+position = Vector2(393, 398)
+connections = [NodePath("../waypoint"), NodePath("../waypoint4"), NodePath("../waypoint10")]
 
 [node name="waypoint3" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
-position = Vector2(187, 430)
+position = Vector2(576, 585)
+connections = [NodePath("../waypoint"), NodePath("../waypoint4"), NodePath("../waypoint11"), NodePath("../waypoint16")]
+
+[node name="waypoint4" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(564, 440)
+connections = [NodePath("../waypoint2"), NodePath("../waypoint3"), NodePath("../waypoint5"), NodePath("../waypoint6")]
+
+[node name="waypoint15" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(1392, 424)
+connections = [NodePath("../waypoint8")]
+
+[node name="waypoint14" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(1074, 273)
+connections = [NodePath("../waypoint7")]
+
+[node name="waypoint13" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(802, 161)
+connections = [NodePath("../waypoint6")]
+
+[node name="waypoint12" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(548, 84)
+connections = [NodePath("../waypoint5")]
+
+[node name="waypoint11" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(667, 556)
+connections = [NodePath("../waypoint3")]
+
+[node name="waypoint10" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(371, 325)
+connections = [NodePath("../waypoint2")]
+
+[node name="waypoint9" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(214, 458)
 connections = [NodePath("../waypoint")]
-facing_dir = null
+
+[node name="waypoint8" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(1301, 488)
+connections = [NodePath("../waypoint7"), NodePath("../waypoint15"), NodePath("../waypoint16")]
+
+[node name="waypoint7" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(1035, 352)
+connections = [NodePath("../waypoint14"), NodePath("../waypoint6"), NodePath("../waypoint8")]
+
+[node name="waypoint6" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(781, 236)
+connections = [NodePath("../waypoint13"), NodePath("../waypoint5"), NodePath("../waypoint4"), NodePath("../waypoint7")]
+
+[node name="waypoint5" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(521, 202)
+connections = [NodePath("../waypoint12"), NodePath("../waypoint6"), NodePath("../waypoint4")]
+
+[node name="waypoint16" parent="Props" node_paths=PackedStringArray("connections") instance=ExtResource("7_niivj")]
+position = Vector2(970, 745)
+connections = [NodePath("../waypoint8"), NodePath("../waypoint3")]
 
 [node name="Projectiles" type="Node2D" parent="."]
 
@@ -106,3 +190,10 @@ color = Color(0, 0, 0, 0.376471)
 
 [editable path="PlayerCamera"]
 [editable path="Props/npc"]
+[editable path="Props/npc2"]
+[editable path="Props/npc3"]
+[editable path="Props/npc4"]
+[editable path="Props/npc5"]
+[editable path="Props/npc6"]
+[editable path="Props/npc7"]
+[editable path="Props/Building"]

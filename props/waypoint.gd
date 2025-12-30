@@ -10,6 +10,10 @@ class_name Waypoint
 @export var debug_width := 2.0
 @export var debug_radius := 4.0
 
+var home = false
+var open = false
+var occupied = false
+
 func _ready():
 	queue_redraw()
 
@@ -21,7 +25,10 @@ func _draw():
 	if not Engine.is_editor_hint():
 		return
 
-	draw_circle(Vector2.ZERO, debug_radius, debug_color)
+	if home:
+		draw_circle(Vector2.ZERO, debug_radius, Color(1, 0, 0))
+	else:
+		draw_circle(Vector2.ZERO, debug_radius, debug_color)
 
 	for wp in connections:
 		if wp:
@@ -31,3 +38,14 @@ func _draw():
 				debug_color,
 				debug_width
 			)
+			_draw_arrow(Vector2.ZERO, to_local(wp.global_position), debug_color, debug_radius * 5)
+			
+func _draw_arrow(start: Vector2, end: Vector2, color: Color, arrow_size: float = 8.0):
+	var dir = (end - start).normalized()
+	var perp = Vector2(-dir.y, dir.x)
+
+	var tip = end
+	var left = end - dir * arrow_size + perp * (arrow_size * 0.5)
+	var right = end - dir * arrow_size - perp * (arrow_size * 0.5)
+
+	draw_polygon([tip, left, right], [color])

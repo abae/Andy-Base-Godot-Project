@@ -1,21 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjxbdu3okybl5"]
+[gd_scene load_steps=6 format=3 uid="uid://bjxbdu3okybl5"]
 
 [ext_resource type="PackedScene" path="res://control/virtual/Hurtbox.tscn" id="1"]
-[ext_resource type="Shader" uid="uid://dq58ydpet1n5c" path="res://shaders/grass_cover.gdshader" id="1_x8kxw"]
 [ext_resource type="Script" uid="uid://bn7be5et2fadn" path="res://player/Player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dreu0r4nkqe34" path="res://control/virtual/Hitbox.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://b80vqnrnqbpb6" path="res://props/Verlet.tscn" id="4_83hs8"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqcbf"]
-shader = ExtResource("1_x8kxw")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8kxw"]
 radius = 20.0
 height = 100.0
 
 [node name="Player" type="CharacterBody2D"]
-material = SubResource("ShaderMaterial_aqcbf")
-position = Vector2(6, 0)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("2")

@@ -1,0 +1,21 @@
+A grocery store that’s definitely overstocked on carrots.
+Call out?
+- Yes
+	audio "res://sound/sfx/wormcall.wav"
+	[wait time="2.0"]
+	...
+	unknown: I can’t open right now… the carrots unionized.
+	if {bunnyKey} == true:
+		unknown: ... truth be told, I saw Hedgehog outside, helping the plants.
+		unknown: It makes me feel like maybe I should open my shop too…
+		unknown: but I’m never sure if anyone notices.
+		- You’re doing great
+			unknown: That’s nice to hear, still, I feel like I might be missing something.
+		- Do you want me to help with your shelves?
+			unknown: Thanks… but it's alright I got it.
+		- I can see how much you’ve been working, the shelves are so tidy.
+			unknown: …Really? You noticed?
+			unknown: I suppose… maybe it’s okay to open for a little while.
+			set {bunnyOpen} = true
+- No
+[signal arg="dialogue_end"]

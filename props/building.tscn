@@ -1,13 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0bvpsm62f6v3"]
+[gd_scene load_steps=3 format=3 uid="uid://b0bvpsm62f6v3"]
 
+[ext_resource type="Script" uid="uid://dlxqpy8tv5svp" path="res://props/building.gd" id="1_p1q5t"]
 [ext_resource type="Texture2D" uid="uid://nnpliu00ebe3" path="res://icon.png" id="1_ssece"]
 
 [node name="Building" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_p1q5t")
+dialog_timeline = "testTimeline"
+progress_disable = 99
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.19209e-07, -126)
-scale = Vector2(2.25, 3.92187)
+position = Vector2(0, -156)
 texture = ExtResource("1_ssece")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -60)
 polygon = PackedVector2Array(-71, 0, 67, -3, 69, -35, -72, -33)
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InteractArea"]
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 5, -3, 5)

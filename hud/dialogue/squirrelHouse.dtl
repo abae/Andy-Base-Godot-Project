@@ -1,0 +1,46 @@
+if {squirrelKey} == false:
+	A library with a couple of acorns stored within the shelves.
+	Call out?
+	- Yes
+		audio "res://sound/sfx/wormcall.wav"
+		[wait time="2.0"]
+		...
+		unknown: Oh! Hello!
+		unknown: I would open the library, but I’m not confident it’s the right moment.
+		unknown: I don’t like making decisions without all the information.
+		if {mouseOpen} == true:
+		- It’s okay if it’s not perfect.
+			unknown: I appreciate the sentiment, but that doesn’t reduce uncertainty.
+		- People are waiting. You should open.
+			unknown: Pressure introduces error.
+		- What detail are you missing?
+			unknown: I’m trying to decide the optimal open hours so I'm not wasting my time…
+			unknown: ..but I don’t know when people usually stop by.
+			- I can find out for you!
+				unknown: That'd be so helpful. Thank you.
+				set {squirrelKey} = true
+			- Isn't your indecision wasting more time?
+				unknown: Hardly! I can be saving hundreds of hours!
+	- No
+else:
+	unknown: Oh Hello again! Have you… learned anything?
+	- Seems like Bunny and Mouse both agree that swinging by the library is best after a nice lunch. | [if {squirrelKey2} == true and {squirrelKey3} == true] [else="hide"]
+		unknown: That makes sense! A full stomach is certainly an indicator for better focus!
+		unknown: Yes! That reduces uncertainty significantly.
+		unknown: Looks like now is a good time to open then!
+		set {squirrelOpen} = true
+		set {squirrelKey4} = true
+		set {squirrelKey5} = true
+	- Seems like Mouse enjoys sitting to read a good book after lunch | [if {squirrelKey2} == true and {squirrelKey3} == false] [else="hide"]
+		unknown: Intersting... but can you get some more data?
+	- Seems like Bunny enjoys sitting to read a good book after lunch | [if {squirrelKey2} == false and {squirrelKey3} == true]
+		unknown: Intersting... but can you get some more data?
+	- Seems like Hedgehog opens when it feels right | [if {squirrelKey5} == true]
+		unknown: Hedgehog was very kind…
+		..but that didn’t reduce uncertainty at all.
+	- People will show up eventually.
+		unknown: That lacks sufficient data.
+	- I think you should open now.
+		unknown: Thanks but I can't rely on just a single data point.
+
+[signal arg="dialogue_end"]

@@ -1,0 +1,25 @@
+if {bunnyOpen} and not {foxOpen}:
+	Bunny: It feels nice to be seen.
+	Bunny: Fox’s general goods store looks a little messy today…
+	Bunny: I think he’s protective of it. He doesn’t open for just anyone, but he likes it when someone notices the place itself, not him.
+	set {foxKey} = true
+elif {gameEnd} == false:
+	Bunny: Fresh carrots today! Just came in!
+else:
+	Bunny: I love seeing everyone so happy. You did good!
+if {squirrelKey} == true and {squirrelKey3}  ==  false:
+	- Squirrel was wondering what time would be best for opening his library.
+		Bunny: Personally I usually like a good book after a nice meal!
+		set {squirrelKey3} = true
+	- Later!
+if {skunkKey} == true and {skunkKey3} == false:
+	- What do you think of Skunk's coffee?
+		Bunny: Skunk’s coffee helps me steady myself before I start the day. I always stop by when I need a moment.
+		set {skunkKey3} = true
+	- Later!
+if {bearOpen} == true and {bearBunny} == false:
+	- Here you go, Bunny! A little treat for all your hard work.
+		Bunny: Oh! This is just what I needed… thank you!
+		set {bearBunny} = true
+	- Later!
+[signal arg="dialogue_end"]

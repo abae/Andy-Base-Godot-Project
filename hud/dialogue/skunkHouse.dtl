@@ -1,0 +1,73 @@
+A specialty coffee shop with a funky but strangely pleasant smell.
+Call out?
+- Yes
+	audio "res://sound/sfx/wormcall.wav"
+	[wait time="2.0"]
+	...
+	unknown: We’re closed.
+	if {squirrelOpen} == true:
+		- I just came by to say hi.
+			unknown: Coffee’s easy. People aren’t.
+			unknown: I don’t just open for anyone.
+			- I’ve been talking to people, they think highly of you.
+				unknown: …Really? Who, exactly?
+				set {skunkKey} = true
+				set {skunkHedgehogMention} = false
+				set {skunkBunnyMention} = false
+				set {skunkFoxMention} = false
+				set {skunkMouseMention} = false
+				set {skunkSquirrelMention} = false
+				set {skunkNamesMentioned} = 0
+				label talk
+				- Hedgehog says your coffee makes mornings feel easier. | [if {skunkKey2} == true and {skunkHedgehogMention} == false]
+					set {skunkHedgehogMention} = true
+					set {skunkNamesMentioned} += 1.0
+				- Hedgehog likes your café. | [if {skunkKey2} == true and {skunkHedgehogMention} == false]
+					set {skunkHedgehogMention} = true
+				- Bunny says your coffee is nice. | [if {skunkKey3} == true and {skunkBunnyMention} == false]
+					set {skunkBunnyMention} = true
+				- Bunny says your coffee helps her steady herself before starting the day. | [if {skunkKey3} == true and {skunkBunnyMention} == false]
+					set {skunkBunnyMention} = true
+					set {skunkNamesMentioned} += 1.0
+				- Fox said he likes your café. | [if {skunkKey4} == true and {skunkFoxMention} == false]
+					set {skunkFoxMention} = true
+				- Fox said your coffee is good. | [if {skunkKey4} == true and {skunkFoxMention} == false]
+					set {skunkFoxMention} = true
+					set {skunkNamesMentioned} += 1.0
+				- Mouse said he likes hanging out at your café. | [if {skunkKey5} == true and {skunkMouseMention} == false]
+					set {skunkMouseMention} = true
+				- Mouse said it’s quiet at your café, and he can actually think there. | [if {skunkKey5} == true and {skunkMouseMention} == false]
+					set {skunkMouseMention} = true
+					set {skunkNamesMentioned} += 1.0
+				- Squirrel says your café helps her focus on reading without distractions. | [if {skunkKey6} == true and {skunkSquirrelMention} == false]
+					set {skunkSquirrelMention} = true
+					set {skunkNamesMentioned} += 1.0
+				- Squirrel thinks your café is quiet. | [if {skunkKey6} == true and {skunkSquirrelMention} == false]
+					set {skunkSquirrelMention} = true
+				- ...
+					if {skunkNamesMentioned} == 0.0:
+						unknown: Names matter. Don't just chatter.
+					else:
+						unknown: Maybe I'll give it some thought...
+					[end_timeline]
+				unknown: ...
+				if {skunkNamesMentioned} < 3.0:
+					jump talk
+				else:
+					unknown: Alright I'll open up.
+					set {skunkKey2} = true
+					set {skunkKey3} = true
+					set {skunkKey4} = true
+					set {skunkKey5} = true
+					set {skunkKey6} = true
+					set {skunkOpen} = true
+			- Everyone likes your café.
+				unknown: Vague compliments won’t cut it.
+			- You don’t have to be so cautious.
+				unknown: I’m not worried about feelings. I’m worried about trust.
+		- Can I get some coffee?
+			unknown: I said closed. Not complicated.
+		- Why are you closed?
+			unknown: I don’t explain my hours to everyone.
+- No
+[signal arg="dialogue_end"]

@@ -1,0 +1,10 @@
+if {gameEnd} == false:
+	Skunk: Not everyone deserves a cup, you know.
+else:
+	Skunk: …Well, that’s acceptable. The town feels… better, I guess.
+if {bearOpen} == true and {bearSkunk} == false:
+	- Skunk… thought you’d approve of this. Don’t tell me if it’s too much sugar.
+		Skunk: …Not bad, actually. I’ll allow it.
+		set {bearSkunk} = true
+	- Later!
+[signal arg="dialogue_end"]

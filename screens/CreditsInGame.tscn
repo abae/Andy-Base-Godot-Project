@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmn5mcyjn2vjt"]
+
+[ext_resource type="FontFile" uid="uid://d4jl6qfah6xge" path="res://hud/fonts/Skynight.otf" id="1_q0ru6"]
+[ext_resource type="Texture2D" uid="uid://2a07w2jrwqtc" path="res://art/credits_back.png" id="2_wkur8"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditTitle" type="Label" parent="."]
+z_index = 2000
+layout_mode = 0
+offset_top = -248.0
+offset_right = 1920.0
+offset_bottom = -13.0
+theme_override_fonts/font = ExtResource("1_q0ru6")
+theme_override_font_sizes/font_size = 96
+text = "
+Helping Hand"
+horizontal_alignment = 1
+
+[node name="CreditsBack" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5529412)
+position = Vector2(960, 456)
+scale = Vector2(1, 1.2261904)
+texture = ExtResource("2_wkur8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CreditTitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_q0ru6")
+theme_override_font_sizes/font_size = 96
+text = "
+Credits"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Credits" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_q0ru6")
+theme_override_font_sizes/font_size = 48
+text = "Programmer: Andy Bae (@Bae_Yusung)
+Artist: GatchaGachaGirl
+Composer: GatchaGachaGirl and Andrew \"A2Z\" Anderson
+
+Font: Skynight by Origin Type on dafont.com
+Bird SFX: dibko on freesound.org
+Meow SFX: videog on freesound.org
+
+Made in Godot Engine
+w/ Dialogic plugin
+
+Thank you for playing!"
+horizontal_alignment = 1
+vertical_alignment = 2

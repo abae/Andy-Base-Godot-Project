@@ -1,0 +1,23 @@
+A general “guuds” store with a special on jelly.
+Call out?
+- Yes
+	audio "res://sound/sfx/wormcall.wav"
+	[wait time="2.0"]
+	...
+	unknown: I’m busy… come back later.
+	if {foxKey} == true:
+		- This place has seen better days, but it has a lot of character. I like it.
+			unknown: …I keep it running my way. Not always perfect, but it’s mine.
+			- Maybe you should reorganize a few shelves…
+				unknown: I don’t need advice. I know my own store!
+			- I can see that, you’ve made it your own.
+				unknown: …Hmph. Yeah… maybe it’s okay to have a little company.
+				set {foxOpen} = true
+			- Hedgehog’s shop looks nice today.
+				unknown: K.
+		- Do you want me to clean up your store for you?
+			unknown: I didn’t ask for help. I can handle this myself!
+		- Bunny’s shop is open
+			unknown: ...what does that have to do with me?
+- No
+[signal arg="dialogue_end"]

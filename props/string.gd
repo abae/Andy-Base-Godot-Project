@@ -8,7 +8,6 @@ extends Node2D
 @export var start_pin: bool = true
 @export var end_pin: bool = true
 @export var offset: Vector2 = Vector2(0,0)
-@export var end_offset: Vector2 = Vector2(0, 0)
 @export var tightness: int = 3
 @export var target_distance: float = 5.0
 @export var spring_k: float = 10.0 # spring stiffness (force per unit length)
@@ -42,14 +41,15 @@ func init_position():
 func _process(delta):
 	pos[0] = get_parent().position
 	if end_pin:
-		pos[count - 1] = get_parent().position + end_offset - offset
+		pos[count - 1] = get_parent().position + $End.position - offset
 	update_points(delta)
 	for i in range(tightness):
 		update_distance()
 	for i in range(count):
 		pos[i] -= get_parent().position - offset
 	$Line2D.points = pos
-	$Line2D2.points = pos
+	if has_node("Line2D2"):
+		$Line2D2.points = pos
 	for i in range(count):
 		pos[i] += get_parent().position - offset
 

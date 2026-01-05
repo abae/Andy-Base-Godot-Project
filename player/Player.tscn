@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b80vqnrnqbpb6" path="res://props/Verlet.tscn" id="4_83hs8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8kxw"]
-radius = 20.0
-height = 100.0
+radius = 31.0
+height = 112.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -29,7 +29,7 @@ spring_damping = -0.1
 
 [node name="Line2D" parent="Tail" index="0"]
 z_index = -4000
-z_as_relative = false
+y_sort_enabled = true
 width = 30.0
 default_color = Color(0.929412, 0.501961, 0.6, 1)
 joint_mode = 2
@@ -38,6 +38,7 @@ end_cap_mode = 2
 
 [node name="Line2D2" type="Line2D" parent="Tail"]
 z_index = -4001
+y_sort_enabled = true
 points = PackedVector2Array(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 27, 0, 28, 0, 29, 0, 30, 0, 31, 0, 32, 0, 33, 0, 34, 0, 35, 0, 36, 0, 37, 0, 38, 0, 39, 0, 40, 0, 41, 0, 42, 0, 43, 0, 44, 0, 45, 0, 46, 0, 47, 0, 48, 0, 49, 0, 50, 0, 51, 0, 52, 0, 53, 0, 54, 0, 55, 0, 56, 0, 57, 0, 58, 0, 59, 0, 60, 0, 61, 0, 62, 0, 63, 0, 64, 0, 65, 0, 66, 0, 67, 0, 68, 0, 69, 0, 70, 0, 71, 0, 72, 0, 73, 0, 74, 0, 75, 0, 76, 0, 77, 0, 78, 0, 79, 0, 80, 0, 81, 0, 82, 0, 83, 0, 84, 0, 85, 0, 86, 0, 87, 0, 88, 0, 89, 0, 90, 0, 91, 0, 92, 0, 93, 0, 94, 0, 95, 0, 96, 0, 97, 0, 98, 0, 99, 0)
 width = 40.0
 default_color = Color(0, 0, 0, 1)
@@ -49,7 +50,6 @@ end_cap_mode = 2
 length = 3.0
 gravity = Vector2(0, 900)
 offset = Vector2(0, -20)
-end_offset = Vector2(-30, 0)
 spring_k = 2.0
 
 [node name="Line2D" parent="Neck" index="0"]
@@ -60,6 +60,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
+[node name="End" parent="Neck" index="1"]
+position = Vector2(-30, 20)
+
 [node name="Line2D2" type="Line2D" parent="Neck"]
 z_index = -4
 points = PackedVector2Array(0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 25, 0, 26, 0, 27, 0, 28, 0, 29, 0, 30, 0, 31, 0, 32, 0, 33, 0, 34, 0, 35, 0, 36, 0, 37, 0, 38, 0, 39, 0, 40, 0, 41, 0, 42, 0, 43, 0, 44, 0, 45, 0, 46, 0, 47, 0, 48, 0, 49, 0, 50, 0, 51, 0, 52, 0, 53, 0, 54, 0, 55, 0, 56, 0, 57, 0, 58, 0, 59, 0, 60, 0, 61, 0, 62, 0, 63, 0, 64, 0, 65, 0, 66, 0, 67, 0, 68, 0, 69, 0, 70, 0, 71, 0, 72, 0, 73, 0, 74, 0, 75, 0, 76, 0, 77, 0, 78, 0, 79, 0, 80, 0, 81, 0, 82, 0, 83, 0, 84, 0, 85, 0, 86, 0, 87, 0, 88, 0, 89, 0, 90, 0, 91, 0, 92, 0, 93, 0, 94, 0, 95, 0, 96, 0, 97, 0, 98, 0, 99, 0)
@@ -69,11 +72,9 @@ joint_mode = 2
 begin_cap_mode = 2
 
 [node name="Head" parent="." instance=ExtResource("4_83hs8")]
-position = Vector2(-1, 0)
 length = 8.0
 gravity = Vector2(0, -9000)
 offset = Vector2(30, -50)
-end_offset = Vector2(0, -20)
 tightness = 6
 spring_k = 2.0
 
@@ -82,6 +83,9 @@ width = 40.0
 default_color = Color(0, 0, 0, 1)
 joint_mode = 2
 begin_cap_mode = 2
+
+[node name="End" parent="Head" index="1"]
+position = Vector2(0, -20)
 
 [node name="Line2D2" type="Line2D" parent="Head"]
 position = Vector2(1, 2)
@@ -93,9 +97,11 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Eyes" type="Node2D" parent="."]
+use_parent_material = true
 position = Vector2(35, -60)
 
 [node name="Line2D" type="Line2D" parent="Eyes"]
+use_parent_material = true
 position = Vector2(0, 10)
 points = PackedVector2Array(0, 0, 1, 0)
 width = 12.0
@@ -105,6 +111,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Line2D2" type="Line2D" parent="Eyes"]
+use_parent_material = true
 position = Vector2(0, -10)
 points = PackedVector2Array(0, 0, 1, 0)
 width = 12.0
@@ -131,8 +138,7 @@ end_cap_mode = 2
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="."]
 modulate = Color(0, 1, 0, 0.780392)
-position = Vector2(0, -1)
-rotation = 1.5708
+position = Vector2(0, 35)
 shape = SubResource("CapsuleShape2D_x8kxw")
 
 [node name="Hitbox" parent="." instance=ExtResource("3")]

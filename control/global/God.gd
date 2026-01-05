@@ -2,7 +2,8 @@ extends Node
 
 var player = null
 var camera = null
-var actualCamPos : Vector2 = Vector2.ZERO
+var actualCamPos : Vector2 = Vector2(960, 540)
+var cameraSpeed = 0.0
 
 func screen_shake(shakeMagnitude, shakeLength):
 	camera.screen_shake(shakeMagnitude, shakeLength)
@@ -20,6 +21,6 @@ func cam2player():
 	if player == null or camera == null:
 		return
 
-	actualCamPos = actualCamPos.lerp(player.position-Vector2(0, 0), 0.2)
+	actualCamPos = actualCamPos.lerp(player.position-Vector2(0, 0), cameraSpeed)
 	camera.global_position = actualCamPos
 	camera.zoomTarget = 1.0

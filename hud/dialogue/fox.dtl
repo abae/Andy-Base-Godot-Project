@@ -1,0 +1,26 @@
+if {foxOpen} and not {mouseOpen}:
+	Fox: It's nice to see people out for once.
+	Fox: Man I'd kill for a Tacoyaki right now.
+	Fox: Mouse talks big when no one’s listening.\
+	Goes quiet the moment someone’s actually there.
+	set {mouseKey} = true
+elif {gameEnd} == false:
+	Fox: This place has seen better days… but I keep it running my way.
+else:
+	Fox: Hmm… the town feels sharper somehow. That’s… impressive.
+if {squirrelKey} == true and {squirrelKey4}  ==  false:
+	- Squirrel was wondering what time would be best for opening his library.
+		Fox: Can't really help with that, I don't really go to the library much.
+		set {squirrelKey4} = true
+	- Later!
+if {skunkKey} == true and {skunkKey4} == false:
+	- What do you think of Skunk's coffee?
+		Fox: It's better than the coffee I make, that's for sure.
+		set {skunkKey4} = true
+	- Later!
+if {bearOpen} == true and {bearFox} == false:
+	- Fox, I saved the best pearls for you.
+		Fox: Hm… well, I suppose this will make today better.
+		set {bearFox} = true
+	- Later!
+[signal arg="dialogue_end"]

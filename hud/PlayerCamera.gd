@@ -4,7 +4,7 @@ extends Camera2D
 @onready var topLeft = $Limits/TopLeft
 @onready var bottomRight = $Limits/BottomRight
 
-var freeCam = false
+@export var freeCam = false
 var zoomTarget = 1.0
 var zoomSpeed = .1
 var shakeMagnitude = 0.0

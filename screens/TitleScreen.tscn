@@ -1,71 +1,160 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://cxk4jna7fqyyk"]
 
-[ext_resource path="res://hud/Button.tscn" type="PackedScene" id=1]
-[ext_resource path="res://screens/TitleScreen.gd" type="Script" id=2]
-[ext_resource path="res://sound/sfx/sfx_init.wav" type="AudioStream" id=5]
+[ext_resource type="PackedScene" path="res://hud/Button.tscn" id="1"]
+[ext_resource type="Script" uid="uid://fkm5v8rwxigq" path="res://screens/TitleScreen.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bcgqbhtuexlu0" path="res://levels/Template.tscn" id="2_adsba"]
+[ext_resource type="Texture2D" uid="uid://brkf6a7cfgdjg" path="res://blank.png" id="3_3jkfm"]
+[ext_resource type="FontFile" uid="uid://d4jl6qfah6xge" path="res://hud/fonts/Skynight.otf" id="4_7w8kf"]
+[ext_resource type="PackedScene" uid="uid://cweus76bcbeoo" path="res://screens/HowToPlay.tscn" id="4_n7yhr"]
+[ext_resource type="AudioStream" uid="uid://bvaff0csjwlt0" path="res://sound/sfx/sfx_init.wav" id="5"]
+[ext_resource type="PackedScene" uid="uid://by5jp8ou15rr3" path="res://screens/Credits.tscn" id="5_ys8e0"]
 
 [node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 1
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
+
+[node name="LevelTemplate" parent="." instance=ExtResource("2_adsba")]
+create = false
+
+[node name="Sprite2D" parent="LevelTemplate/Environment" index="0"]
+position = Vector2(961, 690)
+
+[node name="Credits" parent="LevelTemplate" index="8"]
+z_index = 2000
+offset_left = -3.0
+offset_top = 1831.0
+offset_right = -3.0
+offset_bottom = 1831.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.5529412)
+z_index = 1999
+position = Vector2(960, 540)
+scale = Vector2(1920, 1080)
+texture = ExtResource("3_3jkfm")
+
+[node name="HowToPlay" parent="." instance=ExtResource("4_n7yhr")]
+visible = false
+z_index = 2000
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Credits" parent="." instance=ExtResource("5_ys8e0")]
+visible = false
+z_index = 2000
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Menu" type="VBoxContainer" parent="."]
+z_index = 2000
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Label" type="Label" parent="Menu"]
+z_index = 2000
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_7w8kf")
+theme_override_font_sizes/font_size = 128
+text = "
+Helping Hand"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CenterRow" type="HBoxContainer" parent="Menu"]
-offset_right = 320.0
-offset_bottom = 180.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
-offset_right = 320.0
-offset_bottom = 180.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="NewGame" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
-offset_top = 32.0
-offset_right = 320.0
-offset_bottom = 58.0
+[node name="NewGame" parent="Menu/CenterRow/Buttons" instance=ExtResource("1")]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95686275, 1, 1)
+theme_override_fonts/font = ExtResource("4_7w8kf")
+theme_override_font_sizes/font_size = 64
 text = "Start Game"
 scene_to_load = "res://levels/Template.tscn"
 
-[node name="HowtoPlay" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
-offset_top = 62.0
-offset_right = 320.0
-offset_bottom = 88.0
+[node name="HowtoPlay" parent="Menu/CenterRow/Buttons" instance=ExtResource("1")]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95686275, 1, 1)
+theme_override_fonts/font = ExtResource("4_7w8kf")
+theme_override_font_sizes/font_size = 64
 text = "How To Play"
-scene_to_load = "res://screens/HowToPlay.tscn"
+scene_to_load = "howToPlay"
 
-[node name="Credits" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
-offset_top = 92.0
-offset_right = 320.0
-offset_bottom = 118.0
+[node name="Credits" parent="Menu/CenterRow/Buttons" instance=ExtResource("1")]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_7w8kf")
+theme_override_font_sizes/font_size = 64
 text = "Credits"
-scene_to_load = "res://screens/Credits.tscn"
+scene_to_load = "credits"
 
-[node name="Quit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
-offset_top = 122.0
-offset_right = 320.0
-offset_bottom = 148.0
+[node name="Quit" parent="Menu/CenterRow/Buttons" instance=ExtResource("1")]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_7w8kf")
+theme_override_font_sizes/font_size = 64
 text = "Quit"
 scene_to_load = "quit"
 
 [node name="StartSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource("5")
+
 [connection signal="pressed" from="Menu/CenterRow/Buttons/Quit" to="." method="_on_Quit_pressed"]
 
+[editable path="LevelTemplate"]
+[editable path="LevelTemplate/PlayerCamera"]
+[editable path="LevelTemplate/Props/npcs/fox"]
+[editable path="LevelTemplate/Props/npcs/mouse"]
+[editable path="LevelTemplate/Props/npcs/bunny"]
+[editable path="LevelTemplate/Props/npcs/hedgehog"]
+[editable path="LevelTemplate/Props/npcs/skunk"]
+[editable path="LevelTemplate/Props/npcs/squirrel"]
+[editable path="LevelTemplate/Props/npcs/bear"]
+[editable path="LevelTemplate/Props/buildingsplacement/fox_house"]
+[editable path="LevelTemplate/Props/buildingsplacement/mouse_house"]
+[editable path="LevelTemplate/Props/buildingsplacement/bunny_house"]
+[editable path="LevelTemplate/Props/buildingsplacement/hedgehog_house"]
+[editable path="LevelTemplate/Props/buildingsplacement/skunk_house"]
+[editable path="LevelTemplate/Props/buildingsplacement/squirrel_house"]
+[editable path="LevelTemplate/Props/buildingsplacement/bear_house"]
+[editable path="LevelTemplate/Props/buildings/fox_house"]
+[editable path="LevelTemplate/Props/buildings/mouse_house"]
+[editable path="LevelTemplate/Props/buildings/bunny_house"]
+[editable path="LevelTemplate/Props/buildings/hedgehog_house"]
+[editable path="LevelTemplate/Props/buildings/skunk_house"]
+[editable path="LevelTemplate/Props/buildings/squirrel_house"]
+[editable path="LevelTemplate/Props/buildings/bear_house"]
+[editable path="LevelTemplate/Props/buildings/Cable7"]
+[editable path="LevelTemplate/Props/buildings/Cable8"]
+[editable path="LevelTemplate/Props/buildings/Cable5"]
+[editable path="LevelTemplate/Props/buildings/Cable6"]
+[editable path="LevelTemplate/Props/buildings/Cable3"]
+[editable path="LevelTemplate/Props/buildings/Cable4"]
+[editable path="LevelTemplate/Props/buildings/Cable2"]
+[editable path="LevelTemplate/Props/buildings/Cable"]
+[editable path="LevelTemplate/Props/buildings/pole2"]
+[editable path="LevelTemplate/Props/buildings/pole3"]
+[editable path="LevelTemplate/Props/buildings/pole4"]
+[editable path="LevelTemplate/Props/buildings/pole5"]
+[editable path="LevelTemplate/Props/buildings/pole1"]
+[editable path="LevelTemplate/Props/buildings/pipes"]
+[editable path="LevelTemplate/Props/buildings/bunny_sign"]
+[editable path="LevelTemplate/Props/buildings/woods"]
 [editable path="Menu/CenterRow/Buttons/NewGame"]
-
 [editable path="Menu/CenterRow/Buttons/Credits"]
-
 [editable path="Menu/CenterRow/Buttons/Quit"]

@@ -1,0 +1,34 @@
+if {mouseKey2} == false:
+	A takoyaki stand. There’s a distinct cheese smell.
+	Call out?
+	- Yes
+		audio "res://sound/sfx/wormcall.wav"
+		[wait time="2.0"]
+		...
+		if {mouseKey} == false:
+			unknown: ..uhh, no habla español.. I mean, erm inglés. No habla inglés.
+			unknown: ...come back later! Or earlier!... or actually... later!
+		else:
+			unknown: Oh! A customer!... I mean... I'm not open!
+			unknown: Was just testing the pan! And the timing!... And the timing of the timing!
+			- I'll wait it smells really good already!
+				unknown: ...Re-really? O..okay... I can do one batch
+				set {mouseKey2} = true
+			- Are you open yet?
+				unknown: N-no...
+			- Do you want help?
+				unknown: No no no. coo many tooks, I mean... too many cooks
+	- No
+else:
+	unknown: I think I’ve got it this time…
+	unknown: I just don’t want it to be wrong when someone’s watching.
+	- You’re doing great! Don’t worry!
+		unknown: I am worried!!
+	- You don’t have to rush. I’m here when you’re ready.
+		unknown: ...okay
+		[wait time="5.0"]
+		unknown: Okay! I think they're done!
+		set {mouseOpen} = true
+	- Maybe flip it earlier?
+		unknown: No--! that's not how I practiced it!
+[signal arg="dialogue_end"]

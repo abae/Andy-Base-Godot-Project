@@ -1,0 +1,9 @@
+if {bearHedgehog} == false or {bearBunny} == false or {bearFox} == false or {bearMouse} == false or {bearSquirrel} == false or {bearSkunk} == false:
+	Bear: Don't think you gave it to everyone yet.
+elif {gameEnd} == false:
+	Bear: Ah, now the town smells like sugar and smiles. Not bad at all.
+	Bear: Every little bit of help adds up. You’ve reminded me how good this town can be. Thank you.
+	set {gameEnd} = true
+else:
+	Bear: Seeing everyone enjoy the boba… this is why I keep making it. Nice work!
+[signal arg="dialogue_end"]

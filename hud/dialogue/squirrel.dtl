@@ -1,0 +1,15 @@
+if {gameEnd} == false:
+	Squirrel: Shhh… thinking.
+else:
+	Squirrel: The town’s buzzing in a good way. Makes reading more enjoyable.
+if {skunkKey} == true and {skunkKey6} == false:
+	- What do you think of Skunk's coffee?
+		Squirrel: I can focus on reading there… fewer distractions than the other shops. That counts as positive, I think.
+		set {skunkKey6} = true
+	- Later!
+if {bearOpen} == true and {bearSquirrel} == false:
+	- Squirrel, this should help you focus through your next book.
+		Squirrel: Finally, fuel to think properly. Thanks!
+		set {bearSquirrel} = true
+	- Later!
+[signal arg="dialogue_end"]

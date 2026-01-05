@@ -1,73 +1,92 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://cexgbli1oifoi"]
 
-[ext_resource path="res://hud/fonts/m3x6.ttf" type="FontFile" id=1]
-[ext_resource path="res://art/splashScreenAnim.json" type="PackedScene" id=2]
-[ext_resource path="res://screens/Splash.gd" type="Script" id=7]
-[ext_resource path="res://sound/sfx/sfx_init.wav" type="AudioStream" id=8]
-[ext_resource path="res://sound/sfx/sfx_bark.ogg" type="AudioStream" id=9]
+[ext_resource type="FontFile" uid="uid://8npteisakcv5" path="res://hud/fonts/m3x6.ttf" id="1"]
+[ext_resource type="PackedScene" path="res://art/splashScreenAnim.json" id="2"]
+[ext_resource type="Script" uid="uid://0vxqpxy5hkpf" path="res://screens/Splash.gd" id="7"]
+[ext_resource type="AudioStream" uid="uid://bvaff0csjwlt0" path="res://sound/sfx/sfx_init.wav" id="8"]
+[ext_resource type="AudioStream" uid="uid://fip3sch0eyyx" path="res://sound/sfx/sfx_bark.ogg" id="9"]
 
-[sub_resource type="FontFile" id=1]
-size = 32
-font_data = ExtResource( 1 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/96/0/ascent = 0.0
+cache/0/96/0/descent = 0.0
+cache/0/96/0/underline_position = 0.0
+cache/0/96/0/underline_thickness = 0.0
+cache/0/96/0/scale = 1.0
+cache/0/128/0/ascent = 0.0
+cache/0/128/0/descent = 0.0
+cache/0/128/0/underline_position = 0.0
+cache/0/128/0/underline_thickness = 0.0
+cache/0/128/0/scale = 1.0
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 2.5
 tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Bark")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"clips": [ {
+"clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 8 )
+"stream": ExtResource("8")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 9 )
-} ],
-"times": PackedFloat32Array( 0, 1.5 )
+"stream": ExtResource("9")
+}],
+"times": PackedFloat32Array(0, 1.5)
 }
+tracks/0/use_blend = true
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 2.5 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [  ],
-"method": "go_to_menu"
-} ]
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"go_to_menu"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2adtv"]
+_data = {
+&"splash": SubResource("2")
 }
 
 [node name="Splash" type="Node"]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
-[node name="Node2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 160, 90 )
-scale = Vector2( 0.167, 0.167 )
+[node name="Node2D" parent="." instance=ExtResource("2")]
+position = Vector2(960, 540)
 
 [node name="Label" type="Label" parent="."]
-offset_left = 123.5
-offset_top = 133.0
-offset_right = 215.5
-offset_bottom = 159.0
-theme_override_fonts/font = SubResource( 1 )
+offset_left = 810.0
+offset_top = 769.0
+offset_right = 1178.0
+offset_bottom = 956.0
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 128
 text = "@Bae_Yusung"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/splash = SubResource( 2 )
+libraries = {
+&"": SubResource("AnimationLibrary_2adtv")
+}
 
 [node name="Bark" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource("9")
 
 [node name="Init" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource("8")

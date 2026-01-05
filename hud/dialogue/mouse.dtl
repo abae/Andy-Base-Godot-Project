@@ -1,0 +1,21 @@
+if {gameEnd} == false:
+	Mouse: Hot and fresh! Don’t burn your tongue!
+else:
+	Mouse: Hehe… finally, a quiet moment to enjoy this properly!
+if {squirrelKey} == true and {squirrelKey2}  ==  false:
+	- Squirrel was wondering what time would be best for opening his library.
+		Mouse: Oh! Um... usually after food!
+		Mouse: Empty stomachs make loud thoughts.
+		set {squirrelKey2} = true
+	- Later!
+if {skunkKey} == true and {skunkKey5} == false:
+	- What do you think of Skunk's coffee?
+		Mouse: …Uh, well… it’s quiet there? I can actually think without panicking. So… yes. Good. Definitely good.
+		set {skunkKey5} = true
+	- Later!
+if {bearOpen} == true and {bearMouse} == false:
+	- Mouse! Don’t eat it all at once… okay, maybe just a few.
+		Mouse: Ahhh! Perfect timing, I was starving!
+		set {bearMouse} = true
+	- Later!
+[signal arg="dialogue_end"]

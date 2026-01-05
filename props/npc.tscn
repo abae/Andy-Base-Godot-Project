@@ -1,27 +1,129 @@
-[gd_scene load_steps=5 format=3 uid="uid://6jfy5w6icw6g"]
+[gd_scene load_steps=10 format=3 uid="uid://6jfy5w6icw6g"]
 
 [ext_resource type="Script" uid="uid://ciw0bmh3j216j" path="res://props/npc.gd" id="1_whwuj"]
 [ext_resource type="Texture2D" uid="uid://nnpliu00ebe3" path="res://icon.png" id="2_0vnn2"]
+[ext_resource type="Texture2D" uid="uid://dasyn7f42n0eq" path="res://art/creature_animation/out/bear_ss.png" id="2_yp8fw"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yp8fw"]
-radius = 23.769728
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_whwuj"]
+radius = 18.2
+height = 67.9
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1b84k"]
 radius = 157.051
 
+[sub_resource type="Animation" id="Animation_1b84k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_22b0s"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_0vnn2"]
+resource_name = "idle"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xjq5d"]
+_data = {
+&"RESET": SubResource("Animation_1b84k"),
+&"idle": SubResource("Animation_0vnn2"),
+&"walk": SubResource("Animation_22b0s")
+}
+
 [node name="npc" type="CharacterBody2D"]
+process_mode = 4
+visible = false
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_whwuj")
 dialog_timeline = "testTimeline"
 
 [node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(1, 0.121569, 1, 1)
-position = Vector2(2, -2)
-scale = Vector2(1.39062, 1.40625)
-texture = ExtResource("2_0vnn2")
+texture = ExtResource("2_yp8fw")
+hframes = 5
+frame = 2
+
+[node name="Eyes" type="Node2D" parent="Icon"]
+use_parent_material = true
+position = Vector2(0, -36.205)
+
+[node name="Line2D" type="Line2D" parent="Icon/Eyes"]
+use_parent_material = true
+position = Vector2(-22, 0)
+points = PackedVector2Array(0, 0, 1, 0)
+width = 12.0
+default_color = Color(0.00184107, 0.00184107, 0.00184107, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="Icon/Eyes"]
+use_parent_material = true
+position = Vector2(22, 0)
+points = PackedVector2Array(0, 0, 1, 0)
+width = 12.0
+default_color = Color(0.00184107, 0.00184107, 0.00184107, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D3" type="Line2D" parent="Icon/Eyes"]
+position = Vector2(4.315, -12.475)
+points = PackedVector2Array(0, 0, 0.1, 0)
+width = 3.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2D4" type="Line2D" parent="Icon/Eyes"]
+position = Vector2(0, 10)
+points = PackedVector2Array(0, 0, 0.1, 0)
+width = 2.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_yp8fw")
+y_sort_enabled = true
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_whwuj")
 
 [node name="InteractArea" type="Area2D" parent="."]
 position = Vector2(1, 1)
@@ -37,3 +139,8 @@ self_modulate = Color(1, 0.043137256, 1, 1)
 position = Vector2(-1.9073486e-06, -2.999998)
 scale = Vector2(0.3125, 0.3125)
 texture = ExtResource("2_0vnn2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xjq5d")
+}

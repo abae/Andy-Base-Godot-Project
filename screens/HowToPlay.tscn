@@ -1,59 +1,46 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cweus76bcbeoo"]
 
-[ext_resource path="res://hud/fonts/m3x6.ttf" type="FontFile" id=1]
-[ext_resource path="res://hud/Button.tscn" type="PackedScene" id=3]
-[ext_resource path="res://screens/StaticScreen.gd" type="Script" id=4]
-
-[sub_resource type="FontFile" id=1]
-size = 48
-font_data = ExtResource( 1 )
-
-[sub_resource type="FontFile" id=2]
-font_data = ExtResource( 1 )
+[ext_resource type="FontFile" uid="uid://d4jl6qfah6xge" path="res://hud/fonts/Skynight.otf" id="1_0jmt3"]
 
 [node name="HowToPlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" parent="." instance=ExtResource( 3 )]
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-text = ""
-scene_to_load = "res://screens/TitleScreen.tscn"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HowtoPlayTitle" type="Label" parent="VBoxContainer"]
-offset_right = 320.0
-offset_bottom = 38.0
-theme_override_fonts/font = SubResource( 1 )
-text = "How To Play"
-align = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0jmt3")
+theme_override_font_sizes/font_size = 96
+text = "
+How To Play"
+horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-offset_top = 42.0
-offset_right = 320.0
-offset_bottom = 56.0
+layout_mode = 2
 
 [node name="HowtoPlay" type="Label" parent="VBoxContainer"]
-offset_top = 60.0
-offset_right = 320.0
-offset_bottom = 105.0
-theme_override_fonts/font = SubResource( 2 )
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0jmt3")
+theme_override_font_sizes/font_size = 48
 text = "
 
-Click anywhere to exit"
-align = 1
-valign = 2
+
+
+WASD/Arrow keys/Joystick - Move
+Enter/Space/Left mouse/Gamepad A - Interact
+
+
+
+
+
+
+Press \"Interact\" key to exit"
+horizontal_alignment = 1
+vertical_alignment = 2

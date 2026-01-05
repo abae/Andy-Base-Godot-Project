@@ -1,0 +1,37 @@
+if {hedgehogOpen} == false:
+	Hedgehog: Oh… hello. I wasn’t expecting anyone.
+	Hedgehog: I’ve been trying to keep everything alive by myself, and it’s… a lot.
+	- Your plants look amazing!
+		Hedgehog: Thanks… but even if they look good, I worry about all the little things.
+	- Do you want help?
+		Hedgehog: You’d… help me?
+		Hedgehog: I suppose… maybe I could open for a little while.
+		set {hedgehogOpen} = true
+	- I just wanted to say hi.
+		Hedgehog: Hi… it’s nice to meet someone… but I can’t step away right now.
+elif {hedgehogOpen} and not {bunnyOpen}:
+	Hedgehog: I’m glad someone’s helping me out… it makes a difference.
+	Hedgehog: Hey, by the way, I stepped outside to care for the plants…
+	Hedgehog: and I saw Bunny fussing with organizing her shelves. She looks like she could use a kind word.
+	set {bunnyKey} = true
+elif {gameEnd} == false:
+	Hedgehog: These leaves aren’t going to water themselves.
+else:
+	Hedgehog: Ah… the town feels lively now. Nice work today!
+if {squirrelKey} == true and {squirrelKey5}  ==  false:
+	- Squirrel was wondering what time would be best for opening his library.
+		Hedgehog: Hmm, I usually just open when it feels right.
+		Hedgehog: I think it’s okay to take your time.
+		set {squirrelKey5} = true
+	- Later!
+if {skunkKey} == true and {skunkKey2} == false:
+	- What do you think of Skunk's coffee?
+		Hedgehog: Ah… it’s calming. I like sitting there for a bit. Makes the morning feel easier.
+		set {skunkKey2} = true
+	- Later!
+if {bearOpen} == true and {bearHedgehog} == false:
+	- Hedgehog, a little sweet boost for your morning.
+		Hedgehog: Delicious… I feel ready to tackle the day.
+		set {bearHedgehog} = true
+	- Later!
+[signal arg="dialogue_end"]

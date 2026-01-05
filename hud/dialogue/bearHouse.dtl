@@ -1,0 +1,27 @@
+A boba shop that seems abandoned.
+Call out?
+- Yes
+	audio "res://sound/sfx/wormcall.wav"
+	[wait time="2.0"]
+	if {skunkOpen} == true:
+		set {bearOpen} = true
+		Bear: Ah, seeing you help out around town inspired me to make some extra boba.
+		Bear: ... sorry if I was unresponsive, got into the grove of it and I'm known to get too focused.
+		label help
+		- I can help hand it out to everyone.
+			Bear: Perfect! That’s exactly why I like having you around.\
+			Let’s make sure everyone gets some.
+			set {bearKey} = true
+			[end_timeline]
+		- I'll drink it all. | [if {bearOptionalResponse1} == false] [else="hide"]
+			Bear: Hey! That’s not the point… maybe just one for you.
+			set {bearOptionalResponse1} = true
+		- Do you want me to just put it on the counter? | [if {bearOptionalResponse2} == false]
+			Bear: Hmm… I guess. But it’s more fun if you hand it out.
+			set {bearOptionalResponse2} = true
+		jump help
+	else:
+		...
+		No response
+- No
+[signal arg="dialogue_end"]

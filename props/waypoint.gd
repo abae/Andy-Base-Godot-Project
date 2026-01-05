@@ -22,7 +22,16 @@ func _process(_delta):
 
 
 func _draw():
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() or GameState.debug == false:
+		draw_circle(Vector2.ZERO, 30, Color8(253,203,176))
+		for wp in connections:
+			if wp:
+				draw_line(
+					Vector2.ZERO,
+					to_local(wp.global_position),
+					Color8(253,203,176),
+					60
+				)
 		return
 
 	if home:

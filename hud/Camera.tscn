@@ -3,19 +3,18 @@
 [ext_resource type="Script" uid="uid://b13ardxpu7uco" path="res://hud/PlayerCamera.gd" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(2e+08, 2000)
+size = Vector2(200000000, 1997.5)
 
 [sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(2000, 2e+08)
+size = Vector2(2000, 200000000)
 
 [sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(2e+08, 2000)
+size = Vector2(200000000, 1998)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(2000, 2e+08)
+size = Vector2(1999.75, 200000000)
 
 [node name="Camera2D" type="Camera2D"]
-anchor_mode = 0
 limit_left = -1215752192
 limit_top = -1215752192
 limit_right = 1215752192

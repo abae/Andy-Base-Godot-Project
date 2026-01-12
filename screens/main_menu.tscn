@@ -1,0 +1,236 @@
+[gd_scene load_steps=4 format=3 uid="uid://dckf8mavlivl7"]
+
+[ext_resource type="FontFile" uid="uid://8npteisakcv5" path="res://hud/fonts/m3x6.ttf" id="1_ocono"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ocono"]
+
+[sub_resource type="Theme" id="Theme_ocono"]
+default_font = ExtResource("1_ocono")
+default_font_size = 36
+Button/colors/icon_focus_color = Color(1, 1, 1, 0)
+Button/styles/focus = SubResource("StyleBoxEmpty_ocono")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -183.715
+offset_right = -9.714996
+offset_bottom = 76.0
+grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("1_ocono")
+theme_override_font_sizes/font_size = 96
+text = "Untitled"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CenterContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -270.0
+offset_right = 287.0
+grow_vertical = 0
+theme = SubResource("Theme_ocono")
+
+[node name="MainButtons" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -185.0
+offset_right = 114.0
+grow_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="NewGame" type="Button" parent="CenterContainer/MainButtons"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+theme_override_colors/font_hover_color = Color(0.48570406, 0.4857034, 0.4857031, 1)
+text = "New Game"
+alignment = 0
+
+[node name="Settings" type="Button" parent="CenterContainer/MainButtons"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+theme_override_colors/font_hover_color = Color(0.48570406, 0.4857034, 0.4857031, 1)
+text = "Settings"
+alignment = 0
+
+[node name="HowToPlay" type="Button" parent="CenterContainer/MainButtons"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+theme_override_colors/font_hover_color = Color(0.48570406, 0.4857034, 0.4857031, 1)
+text = "How to Play"
+alignment = 0
+
+[node name="Credits" type="Button" parent="CenterContainer/MainButtons"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+theme_override_colors/font_hover_color = Color(0.48570406, 0.4857034, 0.4857031, 1)
+text = "Credits"
+alignment = 0
+
+[node name="Quit" type="Button" parent="CenterContainer/MainButtons"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+theme_override_colors/font_hover_color = Color(0.48570406, 0.4857034, 0.4857031, 1)
+text = "Quit"
+alignment = 0
+
+[node name="Settings" type="Control" parent="CenterContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_top = 8.0
+offset_right = 234.0
+offset_bottom = 258.0
+
+[node name="Label" type="Label" parent="CenterContainer/Settings"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 89.0
+offset_bottom = 81.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 48
+text = "Settings"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/Settings"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -202.0
+offset_right = 214.0
+offset_bottom = -45.0
+grow_vertical = 0
+size_flags_horizontal = 0
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/Settings/ScrollContainer"]
+custom_minimum_size = Vector2(4.485, 6.28)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Fullscreen" type="Label" parent="CenterContainer/Settings/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="CenterContainer/Settings/ScrollContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 0)
+
+[node name="MainVolume" type="Label" parent="CenterContainer/Settings/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Main Volume"
+
+[node name="MainVolumeSlider" type="HSlider" parent="CenterContainer/Settings/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="MusicVolume" type="Label" parent="CenterContainer/Settings/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="CenterContainer/Settings/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(160, 30)
+layout_mode = 2
+
+[node name="SFXVolume" type="Label" parent="CenterContainer/Settings/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="CenterContainer/Settings/ScrollContainer/GridContainer"]
+custom_minimum_size = Vector2(160, 30)
+layout_mode = 2
+
+[node name="Back" type="Button" parent="CenterContainer/Settings"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -37.0
+offset_right = 44.0
+grow_vertical = 0
+theme_override_colors/font_pressed_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+theme_override_colors/font_hover_color = Color(0.48570406, 0.4857034, 0.4857031, 1)
+text = "Back"
+alignment = 0
+
+[node name="HowToPlay" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 1
+offset_right = 111.0
+offset_bottom = 61.0
+
+[node name="Title" type="Label" parent="CenterContainer/HowToPlay"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 48
+text = "How to Play"
+
+[node name="Label" type="Label" parent="CenterContainer/HowToPlay"]
+layout_mode = 2
+text = "blahhh
+
+
+
+"
+
+[node name="Back" type="Button" parent="CenterContainer/HowToPlay"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+theme_override_colors/font_hover_color = Color(0.48570406, 0.4857034, 0.4857031, 1)
+text = "Back"
+alignment = 0
+
+[node name="Credits" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 1
+offset_right = 111.0
+offset_bottom = 61.0
+
+[node name="Title" type="Label" parent="CenterContainer/Credits"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+
+[node name="Label" type="Label" parent="CenterContainer/Credits"]
+layout_mode = 2
+text = "blahhh
+
+
+
+"
+
+[node name="Back" type="Button" parent="CenterContainer/Credits"]
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+theme_override_colors/font_hover_color = Color(0.48570406, 0.4857034, 0.4857031, 1)
+text = "Back"
+alignment = 0

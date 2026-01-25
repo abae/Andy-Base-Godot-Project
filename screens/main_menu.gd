@@ -1,4 +1,4 @@
-extends _BASE_
+extends Control
 
 # signals
 
